@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+
+body {
+    font-family: "Days One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    max-width: 1380px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+p {
+
+}
