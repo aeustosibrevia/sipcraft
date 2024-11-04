@@ -1,4 +1,3 @@
-/* Загальні стилі */
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +10,6 @@ body {
     color: #4a4a4a;
 }
 
-/* Шапка */
 header {
     background-color: #f4ecd8;
     padding: 20px 0;
@@ -31,11 +29,16 @@ header {
     font-family: 'Arial', sans-serif;
 }
 
+.logo a{  
+    text-decoration: none;
+    color: inherit;    
+}
+
 .search-bar {
     flex-grow: 1;
     margin: 0 40px;
     position: relative;
-    display: flex; 
+    display: flex;
 }
 
 .search-bar input {
@@ -54,12 +57,12 @@ header {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px; 
+    margin-left: 10px;
     font-size: 16px;
 }
 
 .search-button:hover {
-    background-color: #b87c42; 
+    background-color: #b87c42;
 }
 
 nav ul {
@@ -84,7 +87,62 @@ nav ul li .icon {
     height: 24px;
 }
 
-/* Основний контент - категорії */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 40px;
+    background-color: #faf1e6;
+    position: relative;
+    min-height: 400px;
+}
+
+.hero-text {
+    max-width: 600px;
+    margin-right: 80px;
+    margin-left: 40px;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 40px;
+    color: #d09a56;
+    margin-bottom: 10px;
+}
+
+.hero h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    margin-bottom: 30px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.hero button {
+    padding: 15px 30px;
+    background-color: #d09a56;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.hero-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 600px;
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 .section-line {
     border: none; 
@@ -155,7 +213,6 @@ nav ul li .icon {
     margin-top: 5px; 
 }
 
-/* Заклик до дії */
 .prompt {
     margin-top: 40px;
     font-size: 24px;
@@ -189,11 +246,7 @@ nav ul li .icon {
     .header-container {
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    .search-bar {
-        margin: 10px;
-        max-width: 300px;
+        align-items: center;
     }
     .category-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -206,11 +259,6 @@ nav ul li .icon {
 
 /* Адаптивність для великих екранів (понад 1024px) */
 @media only screen and (min-width: 1025px) {
-    .header-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
     .category-grid {
         grid-template-columns: repeat(4, 1fr);
     }

@@ -1,74 +1,66 @@
 document.addEventListener("DOMContentLoaded", function() {
     const rightScrollBtn = document.querySelector('.right-scroll');
     const leftScrollBtn = document.querySelector('.left-scroll');
-    const categories = Array.from(document.querySelectorAll('.category')); // Усі категорії
-    let visibleCount = getVisibleCount(); // Отримуємо кількість видимих категорій відповідно до ширини екрана
-    let currentStartIndex = 0; // Індекс першої видимої категорії
+    const categories = Array.from(document.querySelectorAll('.category')); 
+    let visibleCount = getVisibleCount(); 
+    let currentStartIndex = 0; 
 
-    // Функція для отримання кількості видимих категорій
-    function getVisibleCount() {
+      function getVisibleCount() {
         const screenWidth = window.innerWidth;
         if (screenWidth < 600) {
-            return 1; // На маленьких екранах показуємо 1 категорію
+            return 1; 
         } else if (screenWidth < 1024) {
-            return 2; // На середніх екранах показуємо 2 категорії
+            return 2; 
         } else {
-            return 4; // На великих екранах показуємо 4 категорії
+            return 4; 
         }
     }
 
-    // Функція для оновлення видимих категорій
     function updateVisibleCategories() {
         categories.forEach((category, index) => {
             if (index >= currentStartIndex && index < currentStartIndex + visibleCount) {
-                category.style.display = 'flex'; // Показуємо категорію
+                category.style.display = 'flex';
             } else {
-                category.style.display = 'none'; // Ховаємо категорію
+                category.style.display = 'none'; 
             }
         });
 
-        // Оновлюємо видимість стрілок
         updateArrowVisibility();
     }
 
-    // Оновлення видимості стрілок
     function updateArrowVisibility() {
         if (currentStartIndex === 0) {
-            leftScrollBtn.style.display = 'none'; // Ховаємо ліву стрілку на початку
+            leftScrollBtn.style.display = 'none'; 
         } else {
-            leftScrollBtn.style.display = 'block'; // Показуємо ліву стрілку
+            leftScrollBtn.style.display = 'block'; 
         }
 
         if (currentStartIndex + visibleCount >= categories.length) {
-            rightScrollBtn.style.display = 'none'; // Ховаємо праву стрілку, якщо досягли кінця
+            rightScrollBtn.style.display = 'none'; 
         } else {
-            rightScrollBtn.style.display = 'block'; // Показуємо праву стрілку
+            rightScrollBtn.style.display = 'block'; 
         }
     }
 
-    // Оновлюємо кількість видимих категорій при зміні розміру вікна
+ 
     window.addEventListener('resize', function() {
-        visibleCount = getVisibleCount(); // Оновлюємо visibleCount при зміні ширини екрана
+        visibleCount = getVisibleCount();
         updateVisibleCategories();
     });
 
-    // Натискання на праву стрілку
     rightScrollBtn.addEventListener('click', function() {
-        // Перевіряємо, чи не досягли ми кінця категорій
         if (currentStartIndex + visibleCount < categories.length) {
-            currentStartIndex++; // Зміщуємо індекс вправо
+            currentStartIndex++;
             updateVisibleCategories();
         }
     });
 
-    // Натискання на ліву стрілку
     leftScrollBtn.addEventListener('click', function() {
         if (currentStartIndex > 0) {
-            currentStartIndex--; // Зміщуємо індекс вліво
+            currentStartIndex--; 
             updateVisibleCategories();
         }
     });
 
-    // Початкова ініціалізація
     updateVisibleCategories();
 });
