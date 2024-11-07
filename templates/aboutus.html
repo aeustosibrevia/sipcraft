@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SipCraft - Про нас</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesAboutUs.css') }}">
+  <link rel="stylesheet" href="/static/stylesAboutUs.css">
 </head>
 <body>
 
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="index.html"><h1>SipCraft</h1></a>
+                <a href="/"><h1>SipCraft</h1></a>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Пошук...">
@@ -19,12 +19,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Головна</a></li>
-                    <li><a href="categories.html">Магазин</a></li>
-                    <li><a href="aboutus.html">Про нас</a></li>
-                    <li><a href="#"><img src="{{ url_for('static', filename='images/liked.png') }}" alt="Cart" class="icon"></a></li>
-                    <li><a href="login.html"><img src="{{ url_for('static', filename='images/user.png') }}" alt="User" class="icon"></a></li>
-                    <li><a href="#"><img src="{{ url_for('static', filename='images/basket.png') }}" alt="User" class="icon"></a></li>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/categories">Магазин</a></li>
+                    <li><a href="/about">Про нас</a></li>
+                    <li><a href="#"><img src="/static/images/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="/login"><img src="/static/images/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="#"><img src="/static/images/basket.png" alt="User" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
@@ -33,7 +33,7 @@
   <main>
     <section class="about-us">
       <div class="image-container">
-        <img src="{{ url_for('static', filename='images/aboutus.png') }}" alt="Main Image">
+        <img src="/static/images/aboutus.png" alt="Main Image">
       </div>
 
       <div class="history">

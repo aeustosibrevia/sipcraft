@@ -10,35 +10,37 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="index.html"><h1>SipCraft</h1></a>
+                <a href="/"><h1>SipCraft</h1></a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Головна</a></li>
-                    <li><a href="categories.html">Магазин</a></li>
-                    <li><a href="aboutus.html">Про нас</a></li>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/categories">Магазин</a></li>
+                    <li><a href="/about">Про нас</a></li>
                     <li><a href="#"><img src="{{ url_for('static', filename='images/liked.png') }}" alt="Cart" class="icon"></a></li>
-                    <li><a href="login.html"><img src="{{ url_for('static', filename='images/user.png') }}" alt="User" class="icon"></a></li>
-                    <li><a href="#"><img src="{{ url_for('static', filename='images/basket.png') }}" alt="User" class="icon"></a></li>
+                    <li><a href="/login"><img src="{{ url_for('static', filename='images/user.png') }}" alt="User" class="icon"></a></li>
+                    <li><a href="#"><img src="{{ url_for('static', filename='images/basket.png') }}" alt="Basket" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <main class="main-content">
         <section class="login-section">
             <div class="login-text">
                 <h2>Ласкаво просимо!</h2>
                 <h3>Увійдіть у свій обліковий запис</h3>
                 <p>Будь ласка, введіть свої дані для входу.</p>
-                <form action="login.php" method="post" class="login-form">
+                <form action="{{ url_for('login') }}" method="post" class="login-form">
                     <input type="text" name="username" placeholder="Ім'я користувача" required>
                     <input type="password" name="password" placeholder="Пароль" required>
                     <button type="submit" class="login-btn">Увійти</button>
                 </form>
-                <p>Ще немає облікового запису? <a href="singup.html" class="register-link">Зареєструватися</a></p>
+                <p>Ще немає облікового запису? <a href="/signup" class="register-link">Зареєструватися</a></p>
             </div>
         </section>
     </main>
+
     <footer class="site-footer">
         <p>&copy; 2024 Назва Сайту. Усі права захищені.</p>
     </footer>
