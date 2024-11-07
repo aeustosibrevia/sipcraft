@@ -1,0 +1,278 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #4b4b4b;
+    background-color: #fdf9f4;
+}
+
+header {
+    background-color: #f4ecd8;
+    padding: 20px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    font-size: 28px;
+    color: #5a5a5a;
+    font-family: 'Arial', sans-serif;
+}
+
+.logo a{  
+    text-decoration: none;
+    color: inherit;    
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 40px;
+    position: relative;
+    display: flex;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 15px;
+    background-color: #d09a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: #b87c42;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #6e6e6e;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+nav ul li .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.about-us {
+    display: flex;
+    padding: 40px 20px;
+    background-color: #faf1e6;
+}
+
+.image-container {
+    width: 30%;
+    padding: 20px;
+}
+
+.image-container img {
+    width: 85%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.history {
+    width: 65%;
+    padding: 40px 20px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgb(255, 255, 255, 0.6)), url('images/bottle.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #4b4b4b;
+    border-radius: 10px;
+}
+
+.history h2 {
+    font-size: 48px;
+    color: #4b4b4b;
+    position: relative;
+    text-align: center;
+}
+
+.history hr {
+    border: none;
+    border-top: 5px solid #d49363;
+    width: 40%;
+    margin: 10px auto;
+}
+
+.history p {
+    font-size: 24px;
+    color: #4b4b4b;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.name-origin {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.name-origin h2 {
+    font-size: 48px;
+    color: #4b4b4b;
+    margin-bottom: 10px;
+}
+
+.name-origin p {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #4b4b4b;
+    text-align: center;
+    max-width: 600px;
+    margin: 10px auto;
+}
+
+.name-meaning {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.name-meaning .sip,
+.name-meaning .craft {
+    width: 40%;
+}
+
+.name-meaning .divider {
+    width: 2px;
+    height: 200px;
+    background-color: #d49363;
+    align-self: stretch;
+    margin: 0 20px;
+}
+
+.name-meaning .sip {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.name-meaning .craft {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.name-meaning h3 {
+    font-size: 32px;
+    color: #d49363;
+    margin-bottom: 10px;
+}
+
+.name-meaning .sip p,
+.name-meaning .craft p {
+    font-size: 24px;
+    color: #4b4b4b;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Media Queries */
+
+/* Screens up to 768px */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .about-us {
+        flex-direction: column;
+    }
+
+    .image-container, .history {
+        width: 100%;
+        padding: 20px 10px;
+    }
+
+    .history h2 {
+        font-size: 36px;
+    }
+
+    .history p {
+        font-size: 18px;
+    }
+
+    .name-origin h2 {
+        font-size: 36px;
+    }
+
+    .name-origin p, .name-meaning .sip p, .name-meaning .craft p {
+        font-size: 18px;
+    }
+
+    .name-meaning {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .name-meaning .sip, .name-meaning .craft {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+
+    .name-meaning .divider {
+        width: 100%;
+        height: 2px;
+    }
+}
+
+/* Screens between 768px and 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .history h2, .name-origin h2 {
+        font-size: 42px;
+    }
+
+    .history p, .name-origin p, .name-meaning .sip p, .name-meaning .craft p {
+        font-size: 20px;
+    }
+
+    .name-meaning .sip, .name-meaning .craft {
+        width: 45%;
+    }
+}
