@@ -2,12 +2,10 @@ from app import db, Category, Item, app
 from get_description import get_description_from_file
 
 def add_categories_and_items():
-    # Создайте категорию "Віскі"
     whiskey_category = Category(name='Віскі')
     db.session.add(whiskey_category)
     db.session.commit()
 
-    # Добавьте несколько товаров в категорию "Віскі"
     whiskey_items = [
         {'name': 'Jack Daniel`s Old', 'price': 789, 'description_file': 'whiskey_1',
          'image_url': 'static/picture/alcohol/whiskey/jackblack.png', 'isActive': True, 'quantity': 10},
@@ -34,12 +32,12 @@ def add_categories_and_items():
             image_url=item_data['image_url'],
             isActive=item_data['isActive'],
             quantity=item_data['quantity'],
-            category=whiskey_category  # Связь с категорией
+            category=whiskey_category
         )
         db.session.add(item)
 
     db.session.commit()
 
 if __name__ == '__main__':
-    with app.app_context():  # Создаем контекст приложения
+    with app.app_context():
         add_categories_and_items()
