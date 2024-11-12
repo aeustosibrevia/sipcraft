@@ -19,6 +19,9 @@ class Item(db.Model):
     image_url = db.Column(db.String(200), nullable=False)
     isActive = db.Column(db.Boolean, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    geography = db.Column(db.String(80), nullable=False)
+    strength = db.Column(db.Float, nullable=False)
+    producer = db.Column(db.String(80), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __repr__(self):
@@ -55,14 +58,32 @@ def signup():
 def login():
     return render_template('login.html')
 
-@app.route('/category')
+@app.route('/category') # category == beer
 def category():
-    return render_template('category.html')
+    beer_category = Category.query.filter_by(name='Пиво').first()
+    if beer_category:
+        items = Item.query.filter_by(category=beer_category).all()
+    else:
+        items = []
+    return render_template('category.html', data=items)
 
 @app.route('/whiskey')
 def whiskey():
-    items = Item.query.all()
+    whiskey_category = Category.query.filter_by(name='Віскі').first()
+    if whiskey_category:
+        items = Item.query.filter_by(category=whiskey_category).all()
+    else:
+        items = []
     return render_template('whiskey.html', data=items)
+
+@app.route('/cognac')
+def cognac():
+    cognac_category = Category.query.filter_by(name='Коньяк').first()
+    if cognac_category:
+        items = Item.query.filter_by(category=cognac_category).all()
+    else:
+        items = []
+    return render_template('cognac.html', data=items)
 
 if __name__ == '__main__':
     with app.app_context():

@@ -33,7 +33,7 @@
     <main>
         <section class="category-selection">
             <hr class="section-line">
-            <h2>Пиво</h2>
+            <h2>Коньяк</h2>
             <hr class="section-line">
             <div class="product-grid">
                 {% for el in data %}
@@ -41,7 +41,7 @@
                     <img src="{{ el.image_url }}" alt="{{ el.name }}"  class="product-image">
                     <div class="product-info">
                         <h4>{{ el.name }}</h4>
-                        <p class="category">Пиво</p>
+                        <p class="category">Коньяк</p>
                         <p class="in-stock">IN STOCK</p>
                         <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
                     </div>

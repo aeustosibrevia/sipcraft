@@ -409,6 +409,7 @@ footer {
     }
 }
 
+
 /* Для планшетів (від 768px до 1024px ширини) */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .header-container {
@@ -444,3 +445,7 @@ footer {
         width: 45%;
     }
 }
+
+
+
+

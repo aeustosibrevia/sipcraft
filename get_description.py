@@ -1,8 +1,8 @@
 import os
 
 
-def get_description_from_file(item_name):
-    file_path = os.path.join('description_whiskey.txt')
+def get_description_from_file(item_name, path):
+    file_path = os.path.join(path)
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
