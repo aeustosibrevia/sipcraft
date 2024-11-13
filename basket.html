@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipCraft - Корзина</title>
+    <link rel="stylesheet" href="stylesBasket.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>SipCraft</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="categories.html">Магазин</a></li>
+                    <li><a href="aboutus.html">Про нас</a></li>
+                    <li><a href="#"><img src="images/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="login.html"><img src="images/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="basket.html"><img src="images/basket.png" alt="User" class="icon"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="cart">
+            <h1>Корзина</h1>
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Загально</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-info">
+                            <img src="picture/alcohol/beer/peroni.png" alt="Birra Peroni">
+                            <span>Birra Peroni</span>
+                        </td>
+                        <td>120 ₴</td>
+                        <td class="quantity">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </td>
+                        <td>120 ₴</td>
+                        <td><button class="remove-button">&times;</button></td>
+                    </tr>
+
+                    <tr>
+                        <td class="product-info">
+                            <img src="picture/alcohol/whiskey/jackapple.png" alt="godet">
+                            <span>Jack Daniels Apple</span>
+                        </td>
+                        <td>1199 ₴</td>
+                        <td class="quantity">
+                            <button>-</button>
+                            <span>2</span>
+                            <button>+</button>
+                        </td>
+                        <td>2398 ₴</td>
+                        <td><button class="remove-button">&times;</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="order-summary">
+            <h2>Замовлення</h2>
+            <div class="summary-line">
+                <span>Підсумок</span>
+                <span>4118 ₴</span>
+            </div>
+            <div class="summary-line">
+                <span>Доставка</span>
+                <span>9 ₴</span>
+            </div>
+            <div class="summary-line summary-total">
+                <span>Всього</span>
+                <span>2527 ₴</span>
+            </div>
+            <button class="pay-button">ОПЛАТА</button>
+        </div>
+    </div>
+
+</body>
+</html>

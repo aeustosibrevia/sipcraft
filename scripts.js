@@ -29,14 +29,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateArrowVisibility() {
+
         if (currentStartIndex === 0) {
             leftScrollBtn.style.display = 'none'; 
         } else {
             leftScrollBtn.style.display = 'block'; 
         }
-
         if (currentStartIndex + visibleCount >= categories.length) {
-            rightScrollBtn.style.display = 'none'; 
+            rightScrollBtn.style.display = 'none';
+
         } else {
             rightScrollBtn.style.display = 'block'; 
         }

@@ -107,7 +107,7 @@ nav ul li .icon {
 .history {
     width: 65%;
     padding: 40px 20px;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgb(255, 255, 255, 0.6)), url('images/bottle.png');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgb(255, 255, 255, 0.8)), url('images/bottle.png');
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
