@@ -31,8 +31,23 @@
                 <h2>Ласкаво просимо!</h2>
                 <h3>Реєстрація нового облікового запису</h3>
                 <p>Щоб створити новий обліковий запис, заповніть форму нижче:</p>
-                <form action="register.php" method="post" style="display: flex; flex-direction: column; max-width: 400px;">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <div class="flash-messages">
+                      {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                          {{ message }}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+
+                <form action="/signup" method="post" style="display: flex; flex-direction: column; max-width: 400px;">
                     <input type="text" name="new_username" placeholder="Ім'я користувача" required>
+                    <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="new_password" placeholder="Пароль" required>
                     <input type="password" name="confirm_password" placeholder="Підтвердіть пароль" required>
                     <button type="submit" class="search-button">Зареєструватися</button>

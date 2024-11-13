@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipCraft</title>
+    <link rel="stylesheet" href="/static/stylesCategory.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><h1>SipCraft</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/categories">Магазин</a></li>
+                    <li><a href="/about">Про нас</a></li>
+                    <li><a href="#"><img src="/static/images/liked.png" alt="Liked Items" class="icon"></a></li>
+                    <li><a href="/login"><img src="/static/images/user.png" alt="User Profile" class="icon"></a></li>
+                    <li><a href="#"><img src="/static/images/basket.png" alt="Shopping Cart" class="icon"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="category-selection">
+            <hr class="section-line">
+            <h2>Вино</h2>
+            <hr class="section-line">
+            <div class="product-grid">
+                {% for el in data %}
+                <div class="product">
+                    <img src="{{ el.image_url }}" alt="{{ el.name }}"  class="product-image">
+                    <div class="product-info">
+                        <h4>{{ el.name }}</h4>
+                        <p class="category">Вино</p>
+                        <p class="in-stock">IN STOCK</p>
+                        <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
+                    </div>
+                    <div class="icons">
+                        <button class="icon">&#9825;</button>
+                        <button class="icon">&#128722;</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
