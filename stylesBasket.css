@@ -236,6 +236,7 @@ nav ul li .icon {
     
     .cart-table .quantity button{
         font-size: 0.5em;
+        padding: 2px 3px;
     }
 
     .order-summary {
