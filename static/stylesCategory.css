@@ -173,8 +173,12 @@ nav ul li .icon {
     cursor: pointer;
     color: #d09a56;
     margin-left: 10px;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 /* Адаптивність для мобільних пристроїв (до 768px ширини) */
 @media only screen and (max-width: 768px) {
     .header-container {
@@ -204,14 +208,3 @@ nav ul li .icon {
     }
 }
 
-/* Адаптивність для великих екранів (понад 1024px) */
-@media only screen and (min-width: 1025px) {
-    .header-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}

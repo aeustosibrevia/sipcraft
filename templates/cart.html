@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SipCraft - Корзина</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesBasket.css') }}">
+    <link rel="stylesheet" href="/static/stylesBasket.css">
 </head>
 <body>
     <header>
@@ -21,63 +21,92 @@
                     <li><a href="/">Головна</a></li>
                     <li><a href="/categories">Магазин</a></li>
                     <li><a href="/aboutus">Про нас</a></li>
-                    <li><a href="#"><img src="{{ url_for('static', filename='images/liked.png') }}" alt="Liked" class="icon"></a></li>
-                    <li><a href="/login"><img src="{{ url_for('static', filename='images/user.png') }}" alt="User" class="icon"></a></li>
-                    <li><a href="/cart"><img src="{{ url_for('static', filename='images/basket.png') }}" alt="Basket" class="icon"></a></li>
+                    <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <div class="container">
-        <div class="cart">
-            <h1>Корзина</h1>
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Товар</th>
-                        <th>Ціна</th>
-                        <th>Кількість</th>
-                        <th>Загально</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for el in data %}
-                    <tr>
-                        <td class="product-info">
-                            <img src="{{ el.item.image_url }}" alt="{{ el.item.name }}">
-                            <span>{{ el.item.name }}</span>
-                        </td>
-                        <td>{{ "%.2f"|format(el.item.price) }} ₴</td>
-                        <td class="quantity">
-                                <button class="decrease-quantity" data-item-id="{{ el.item.id }}">-</button>
-                                <span>{{ el.quantity }}</span>
-                                <button class="increase-quantity" data-item-id="{{ el.item.id }}">+</button>
-                        </td>
-                        <td>{{ "%.2f"|format(el.item.price * el.quantity) }} ₴</td>
-                        <td><button class="remove-button" data-item-id="{{ el.item.id }}">&times;</button></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <main>
+        <div class="container">
+            <div class="cart">
+                <h1>Корзина</h1>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Ціна</th>
+                            <th>Кількість</th>
+                            <th>Загально</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for el in data %}
+                        <tr>
+                            <td class="product-info">
+                                <img src="{{ el.item.image_url }}" alt="{{ el.item.name }}">
+                                <span>{{ el.item.name }}</span>
+                            </td>
+                            <td>{{ "%.2f"|format(el.item.price) }} ₴</td>
+                            <td class="quantity">
+                                    <button class="decrease-quantity" data-item-id="{{ el.item.id }}">-</button>
+                                    <span>{{ el.quantity }}</span>
+                                    <button class="increase-quantity" data-item-id="{{ el.item.id }}">+</button>
+                            </td>
+                            <td>{{ "%.2f"|format(el.item.price * el.quantity) }} ₴</td>
+                            <td><button class="remove-button" data-item-id="{{ el.item.id }}">&times;</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="order-summary">
+                <h2>Замовлення</h2>
+                <div class="summary-line">
+                    <span>Підсумок</span>
+                    <span>{{ "%.2f"|format(total_price) }} ₴</span>
+                </div>
+
+                <hr class = "summary-delivery">
+                <h2>Доставка</h2>
+
+                <div class="summary-line">
+                    <label for="city">Місто</label>
+                    <select id="city" name="city">
+                        <option value="kyiv">Київ</option>
+                        <option value="lviv">Львів</option>
+                        <option value="odessa">Одеса</option>
+                        <option value="kharkiv">Харків</option>
+                    </select>
+                </div>
+                <hr>
+
+                <div class="summary-line">
+                    <label for="office">Відділення</label>
+                    <select id="office" name="office">
+                        <option value="Np1">Нова пошта 1</option>
+                        <option value="Np2">Нова пошта 2</option>
+                        <option value="Np3">Нова пошта 3</option>
+                        <option value="Np4">Нова пошта 4</option>
+                    </select>
+                </div>
+                <hr>
+
+                <div class="summary-line">
+                    <span>Доставка</span>
+                    <span>9 ₴</span>
+                </div>
+                <hr>
+                <div class="summary-line summary-total">
+                    <span>Всього</span>
+                    <span>{{ "%.2f"|format(total_price + 9) }} ₴</span>
+                </div>
+                <button class="pay-button">ОПЛАТА</button>
+            </div>
         </div>
-        <div class="order-summary">
-            <h2>Замовлення</h2>
-            <div class="summary-line">
-                <span>Підсумок</span>
-                <span>{{ "%.2f"|format(total_price) }} ₴</span>
-            </div>
-            <div class="summary-line">
-                <span>Доставка</span>
-                <span>9 ₴</span>
-            </div>
-            <div class="summary-line summary-total">
-                <span>Всього</span>
-                <span>{{ "%.2f"|format(total_price + 9) }} ₴</span>
-            </div>
-            <button class="pay-button">ОПЛАТА</button>
-        </div>
-    </div>
+    </main>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

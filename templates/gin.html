@@ -22,9 +22,9 @@
                     <li><a href="/">Головна</a></li>
                     <li><a href="/categories">Магазин</a></li>
                     <li><a href="/about">Про нас</a></li>
-                    <li><a href="#"><img src="/static/images/liked.png" alt="Liked Items" class="icon"></a></li>
-                    <li><a href="/login"><img src="/static/images/user.png" alt="User Profile" class="icon"></a></li>
-                    <li><a href="/cart"><img src="/static/images/basket.png" alt="Shopping Cart" class="icon"></a></li>
+                    <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
@@ -46,9 +46,9 @@
                         <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
                     </div>
                     <div class="icons">
-                        <button class="icon">&#9825;</button>
+                        <button class="icon"><img src="/static/picture/header/liked.png" alt="Wishlist" class="icon"></button>
                         <form action="/add_to_cart/{{ el.id }}" method="POST" style="display: inline;">
-                            <button type="submit" class="icon">&#128722;</button>
+                            <button type="submit" class="icon"><img src="/static/picture/header/basket.png" alt="Add to Cart" class="icon"></button>
                         </form>
                     </div>
                 </div>

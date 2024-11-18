@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: #f4ecd8;
+    background-color: #F5EBD4;
     padding: 20px 0;
 }
 
@@ -92,7 +92,7 @@ nav ul li .icon {
     justify-content: space-between;
     align-items: center;
     padding: 80px 40px;
-    background-color: #faf1e6;
+    background-color: #F5EBD4;
     position: relative;
     min-height: 400px;
 }
@@ -125,6 +125,7 @@ nav ul li .icon {
     padding: 15px 30px;
     background-color: #d09a56;
     color: white;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
     font-size: 18px;
@@ -182,7 +183,7 @@ nav ul li .icon {
     min-height: 110px;
 }
 
-.category a{
+.category-wrapper a{
     text-decoration: none; 
     color: inherit; 
 }
@@ -306,7 +307,7 @@ nav ul li .icon {
     margin: 5px 0;
 }
 
-.product-info .category {
+.product-info .category_prod {
     font-size: 16px;
     color: #a3a3a3;
 }
@@ -328,7 +329,7 @@ nav ul li .icon {
     align-items: center;
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    right: 20px;    
 }
 
 .icon {
@@ -338,6 +339,16 @@ nav ul li .icon {
     cursor: pointer;
     color: #d09a56;
     margin-left: 10px;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-image {
+    width: 20%;  
+    height: 20%; 
 }
 
 footer {
@@ -409,7 +420,6 @@ footer {
     }
 }
 
-
 /* Для планшетів (від 768px до 1024px ширини) */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .header-container {
@@ -432,7 +442,7 @@ footer {
 
     .category {
         margin: 10px 5px;
-        flex: 1 1 calc(33.33% - 10px); /* Відображаємо 3 категорії */
+        flex: 1 1 calc(33.33% - 10px); 
     }
 
     .product-container {
@@ -445,7 +455,3 @@ footer {
         width: 45%;
     }
 }
-
-
-
-
