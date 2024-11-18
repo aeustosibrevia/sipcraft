@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request, session
+from flask import Flask, render_template, flash, redirect, url_for, request, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
@@ -30,6 +30,8 @@ class Item(db.Model):
     producer = db.Column(db.String(80), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
+
+
     def __repr__(self):
         return self.name
 
@@ -46,6 +48,16 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class CartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=1)
+
+    item = db.relationship('Item', backref='cart_items', lazy=True)
+
 
 @app.route('/')
 def index():
@@ -93,6 +105,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -162,6 +175,104 @@ def wine():
     else:
         items = []
     return render_template('wine.html', data=items)
+
+@app.route('/add_to_cart/<int:item_id>', methods=['GET', 'POST'])
+def add_to_cart(item_id):
+    if 'user_id' not in session:
+        flash('Please log in to add items to your cart.', 'error')
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+
+    if cart_item:
+
+        cart_item.quantity += 1
+    else:
+
+        cart_item = CartItem(user_id=user_id, item_id=item_id, quantity=1)
+        db.session.add(cart_item)
+
+    db.session.commit()
+    flash('Item added to cart successfully.', 'success')
+
+    referer = request.referrer
+    if referer:
+        return redirect(referer)
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/cart')
+def cart():
+
+    user_id = session.get('user_id')
+
+    if not user_id:
+        flash('Please log in to view your cart.', 'error')
+        return redirect(url_for('login'))
+
+
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+
+
+    total_price = sum(item.item.price * item.quantity for item in cart_items)
+
+    return render_template(
+        'cart.html',
+        data=cart_items,
+        total_price=total_price
+    )
+
+@app.route('/update_quantity', methods=['POST'])
+def update_quantity():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    data = request.get_json()
+    action = data.get('action')
+    item_id = data.get('item_id')
+
+    if not item_id or action not in ['increase', 'decrease']:
+        return jsonify({'error': 'Invalid data'}), 400
+
+    user_id = session['user_id']
+    cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+
+    if not cart_item:
+        return jsonify({'error': 'Item not found in cart'}), 404
+
+    if action == 'increase':
+        cart_item.quantity += 1
+    elif action == 'decrease' and cart_item.quantity > 1:
+        cart_item.quantity -= 1
+    else:
+        db.session.delete(cart_item)  # Удаляем товар из корзины, если количество стало 0
+
+    db.session.commit()
+    return jsonify({'success': True})
+
+@app.route('/remove_from_cart', methods=['POST', 'GET'])
+def remove_from_cart():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    data = request.get_json()
+    item_id = data.get('item_id')
+
+    if not item_id:
+        return jsonify({'error': 'Invalid data'}), 400
+
+    user_id = session['user_id']
+    cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+
+    if not cart_item:
+        return jsonify({'error': 'Item not found in cart'}), 404
+
+    db.session.delete(cart_item)
+    db.session.commit()
+
+    return jsonify({'success': True})
 
 
 if __name__ == '__main__':

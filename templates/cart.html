@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipCraft - Корзина</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesBasket.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><h1>SipCraft</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/categories">Магазин</a></li>
+                    <li><a href="/aboutus">Про нас</a></li>
+                    <li><a href="#"><img src="{{ url_for('static', filename='images/liked.png') }}" alt="Liked" class="icon"></a></li>
+                    <li><a href="/login"><img src="{{ url_for('static', filename='images/user.png') }}" alt="User" class="icon"></a></li>
+                    <li><a href="/cart"><img src="{{ url_for('static', filename='images/basket.png') }}" alt="Basket" class="icon"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="cart">
+            <h1>Корзина</h1>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Загально</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for el in data %}
+                    <tr>
+                        <td class="product-info">
+                            <img src="{{ el.item.image_url }}" alt="{{ el.item.name }}">
+                            <span>{{ el.item.name }}</span>
+                        </td>
+                        <td>{{ "%.2f"|format(el.item.price) }} ₴</td>
+                        <td class="quantity">
+                                <button class="decrease-quantity" data-item-id="{{ el.item.id }}">-</button>
+                                <span>{{ el.quantity }}</span>
+                                <button class="increase-quantity" data-item-id="{{ el.item.id }}">+</button>
+                        </td>
+                        <td>{{ "%.2f"|format(el.item.price * el.quantity) }} ₴</td>
+                        <td><button class="remove-button" data-item-id="{{ el.item.id }}">&times;</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="order-summary">
+            <h2>Замовлення</h2>
+            <div class="summary-line">
+                <span>Підсумок</span>
+                <span>{{ "%.2f"|format(total_price) }} ₴</span>
+            </div>
+            <div class="summary-line">
+                <span>Доставка</span>
+                <span>9 ₴</span>
+            </div>
+            <div class="summary-line summary-total">
+                <span>Всього</span>
+                <span>{{ "%.2f"|format(total_price + 9) }} ₴</span>
+            </div>
+            <button class="pay-button">ОПЛАТА</button>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Обработка кнопок увеличения/уменьшения количества
+    document.querySelectorAll('.decrease-quantity, .increase-quantity').forEach(button => {
+        button.addEventListener('click', async (e) => {
+            const button = e.target;
+            const action = button.classList.contains('increase-quantity') ? 'increase' : 'decrease';
+            const itemId = button.dataset.itemId;
+
+            try {
+                const response = await fetch(`/update_quantity`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action, item_id: itemId }),
+                });
+
+                if (response.ok) {
+                    location.reload(); // Перезагружаем страницу, чтобы отобразить изменения
+                } else {
+                    alert('Ошибка обновления количества товара');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        });
+    });
+
+    // Обработка кнопок удаления товара
+    document.querySelectorAll('.remove-button').forEach(button => {
+        button.addEventListener('click', async (e) => {
+            const itemId = e.target.dataset.itemId;
+
+            if (!confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+                return; // Если пользователь отменил, ничего не делаем
+            }
+
+            try {
+                const response = await fetch(`/remove_from_cart`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ item_id: itemId }),
+                });
+
+                if (response.ok) {
+                    location.reload(); // Перезагружаем страницу, чтобы отобразить изменения
+                } else {
+                    alert('Ошибка удаления товара');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        });
+    });
+});
+</script>
+
+
+
+</body>
+</html>

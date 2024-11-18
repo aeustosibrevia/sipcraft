@@ -24,7 +24,7 @@
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="#"><img src="/static/images/liked.png" alt="Liked Items" class="icon"></a></li>
                     <li><a href="/login"><img src="/static/images/user.png" alt="User Profile" class="icon"></a></li>
-                    <li><a href="#"><img src="/static/images/basket.png" alt="Shopping Cart" class="icon"></a></li>
+                    <li><a href="/cart"><img src="/static/images/basket.png" alt="Shopping Cart" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +47,9 @@
                     </div>
                     <div class="icons">
                         <button class="icon">&#9825;</button>
-                        <button class="icon">&#128722;</button>
+                        <form action="/add_to_cart/{{ el.id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="icon">&#128722;</button>
+                        </form>
                     </div>
                 </div>
                 {% endfor %}
