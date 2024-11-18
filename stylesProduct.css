@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fef7f1;
+    color: #4a4a4a;
+}
+
+header {
+    background-color: #F5EBD4;
+    padding: 20px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    font-size: 28px;
+    color: #5a5a5a;
+    font-family: 'Arial', sans-serif;
+}
+
+.logo a{  
+    text-decoration: none;
+    color: inherit;    
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 40px;
+    position: relative;
+    display: flex;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 15px;
+    background-color: #d09a56;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: #b87c42;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #6e6e6e;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+nav ul li .icon {
+    width: 24px;
+    height: 24px;
+}
+
+main {
+    margin: 40px 100px;
+    padding: 20px 20px;
+}
+
+.product {
+    display: flex;
+    gap: 40px;
+}
+
+.image{
+    text-align: center;
+}
+
+.image img {
+    width: 40%;
+    border-radius: 10px;
+}
+
+.details {
+    flex: 1;
+}
+
+.details h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4d3c2e;
+    margin-bottom: 20px;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid #C49A6C;
+    margin: 30px auto;
+}
+
+
+.price-quantity {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    flex: 1; 
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1; 
+    justify-content: center; 
+}
+
+.quantity button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: #fff;
+    cursor: pointer;
+    color: #4d3c2e;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-to-favorites, .buy {
+    background-color: #E0C394;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin: auto 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+    flex: 0 1 auto; 
+}
+
+.add-to-favorites {
+    padding: 5px;
+    background-color: transparent; 
+}
+
+.add-to-favorites img {
+    width: 24px;
+    height: 24px;
+}
+
+.description h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #4d3c2e;
+}
+
+.description p {
+    
+    font-size: 16px;
+    line-height: 1.6;
+    margin: auto 30px;
+}
+
+.description-frame{
+    background-color: #F5EBDA;
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+
+.specs {
+    display: flex;
+    gap: 100px;
+    margin-top: 20px;
+    padding: 50px 20px 40px 20px;
+}
+
+.specs div {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F5EBDA;
+    font-size: 14px;
+    font-weight: bold;
+    color: #4d3c2e;
+    position: relative;
+}
+
+.specs div span {
+    position: absolute; 
+    top: -40px; 
+    font-weight: normal; 
+    font-size: 16px; 
+}
+
+.specs div strong {
+    font-weight: bold; 
+    font-size: 18px; 
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    main {
+        margin: 20px;
+        padding: 10px;
+    }
+
+    .product {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .image img {
+        width: 80%;
+    }
+
+    .details h1 {
+        font-size: 22px;
+    }
+
+    .price-quantity {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .quantity {
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .description h2 {
+        font-size: 20px;
+    }
+
+    .description p {
+        font-size: 14px;
+    }
+
+    .specs {
+        flex-direction: column;
+        gap: 60px;
+    }
+}
+
+/* Стили для ширини між 768px і 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main {
+        margin: 20px 50px;
+        padding: 15px;
+    }
+
+    .product {
+        gap: 30px;
+    }
+
+    .image img {
+        width: 60%;
+    }
+
+    .details h1 {
+        font-size: 26px;
+    }
+
+    .price-quantity {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .quantity {
+        justify-content: flex-start;
+    }
+
+    .description h2 {
+        font-size: 22px;
+    }
+
+    .description p {
+        font-size: 15px;
+    }
+
+    .specs {
+        gap: 50px;
+    }
+
+    .specs div {
+        font-size: 14px;
+    }
+}

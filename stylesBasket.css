@@ -90,15 +90,14 @@ nav ul li .icon {
 .container {
     display: flex;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 10% 20px 10%;
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
 
 .cart {
-    flex: 3;
+    flex: 2.5;
 }
 
 .cart h1 {
@@ -139,9 +138,17 @@ nav ul li .icon {
     justify-content: left;
 }
 
+.cart-table .product-price {
+    align-items: center;
+    gap: 10px;
+    justify-content: left;
+    white-space: nowrap;
+}
+
 .cart-table img {
-    width: 30px;
-    height: auto;
+    height: 100px;
+    width: auto;
+    max-width: 100px;
 }
 
 .cart-table .quantity button {
@@ -169,7 +176,7 @@ nav ul li .icon {
     padding: 20px;
     background-color: #FFF;
     text-align: center;
-    max-height: 250px; 
+    max-height: 480px; 
     overflow-y: auto;  
     flex-shrink: 0;  
 }
@@ -179,9 +186,27 @@ nav ul li .icon {
     margin-bottom: 20px;
 }
 
+.order-summary .summary-delivery {
+    height: 1px;
+    background-color: #C49A6C; 
+    border: none; 
+    width: 100%; 
+    margin: 10px auto 40px auto; 
+}  
+
+
+.order-summary hr {
+    height: 1px;
+    background-color: #C49A6C; 
+    border: none; 
+    width: 100%; 
+    margin: 10px auto 20px auto; 
+}  
+
 .summary-line {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
     font-size: 1.1em;
 }
@@ -189,6 +214,25 @@ nav ul li .icon {
 .summary-total {
     font-size: 1.3em;
     font-weight: bold;
+}
+
+.summary-line label {
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+#city, #office{
+    padding: 5px;
+    font-size: 1.1em;
+    width: 60%;
+    max-width: 300px;
+    border: 1px solid #D6C4B0;
+    border-radius: 5px;
+    background-color: #FFF5DE;
+    text-align: center;
+    -webkit-appearance: none;  
+    -moz-appearance: none;     
+    appearance: none;  
 }
 
 .pay-button {
@@ -232,6 +276,11 @@ nav ul li .icon {
 
     .cart-table th, .cart-table td {
         font-size: 0.5em;
+    }
+
+    .cart-table .quantity button{
+        font-size: 0.5em;
+        padding: 2px 3px;
     }
 
     .order-summary {

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: #f4ecd8;
+    background-color: #F5EBD4;
     padding: 20px 0;
 }
 
@@ -92,7 +92,7 @@ nav ul li .icon {
     justify-content: space-between;
     align-items: center;
     padding: 80px 40px;
-    background-color: #faf1e6;
+    background-color: #F5EBD4;
     position: relative;
     min-height: 400px;
 }
@@ -183,7 +183,7 @@ nav ul li .icon {
     min-height: 110px;
 }
 
-.category a{
+.category-wrapper a{
     text-decoration: none; 
     color: inherit; 
 }
