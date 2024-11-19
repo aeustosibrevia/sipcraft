@@ -191,9 +191,6 @@ nav ul li .icon {
         margin: 10px 0;
     }
 
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* Адаптивність для планшетів (від 768px до 1024px ширини) */
@@ -202,9 +199,6 @@ nav ul li .icon {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-    }
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
     }
 }
 
