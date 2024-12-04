@@ -46,6 +46,7 @@
             {% endwith %}
             <div class="product-grid">
                 {% for el in data %}
+                <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
                 <div class="product">
                     <img src="{{ el.image_url }}" alt="{{ el.name }}"  class="product-image">
                     <div class="product-info">
@@ -61,8 +62,10 @@
                         </form>
                     </div>
                 </div>
+                </a>
                 {% endfor %}
             </div>
+            </a>
         </section>
     </main>
 

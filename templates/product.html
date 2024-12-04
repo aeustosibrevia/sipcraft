@@ -1,79 +1,119 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пиво Kurpfalz Brau Helles світле</title>
+    <title>{{ item.name }}</title>
     <link rel="stylesheet" href="/static/stylesProduct.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="index.html"><h1>SipCraft</h1></a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Пошук...">
-                <button class="search-button">Search</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">Головна</a></li>
-                    <li><a href="/categories">Магазин</a></li>
-                    <li><a href="/about">Про нас</a></li>
-                    <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
-                    <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
-            </nav>
+<!-- Header -->
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/"><h1>SipCraft</h1></a>
         </div>
-    </header>
+        <div class="search-bar">
+            <input type="text" placeholder="Пошук...">
+            <button class="search-button">Search</button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/categories">Магазин</a></li>
+                <li><a href="/about">Про нас</a></li>
+                <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
+                <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <main>
-        <section class="product">            
-            <div class="image">
-                <img src="/static/picture/alcohol/beer/peroni.png" alt="Пиво Peroni">
-            </div>
-            
-            <div class="details">
-                <h1>Пиво Peroni</h1>
-                
-                <hr class="divider">
+<main>
+    <section class="product">
+        <div class="image">
+            <img src="/{{ item.image_url }}" alt="{{ item.name }}">
+        </div>
 
-                <div class="price-quantity">
-                    <p class="price">120.00 грн</p>
-                    <div class="quantity">
-                        <button class="circle">-</button>
-                        <span>1</span>
-                        <button class="circle">+</button>
-                    </div>
-                    <button class="add-to-favorites">
-                        <img src="/static/picture/header/liked.png" alt="Додати до улюбленого">
-                    </button>
+        <div class="details">
+            <h1>{{ item.name }}</h1>
+
+            <hr class="divider">
+
+            <div class="price-quantity">
+                <p class="price">₴{{ "%.2f"|format(item.price) }}</p>
+                <div class="quantity">
+                    <button class="decrease-quantity" data-item-id="{{ item.id }}">-</button>
+                    <span class="quant" id="quantity-{{ item.id }}">1</span>
+                    <button class="increase-quantity" data-item-id="{{ item.id }}">+</button>
+                </div>
+                <button class="add-to-favorites">
+                    <img src="/static/picture/header/liked.png" alt="Додати до улюбленого">
+                </button>
+                <form action="/add_to_cart/{{ item.id }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="quantity" id="form-quantity-{{ item.id }}" value="1">
                     <button class="buy">Купити</button>
-                </div>
-
-                <hr class="divider">
-
-                <div class="description">
-                    <h2>Опис</h2>
-                    <div class ="description-frame"><p>
-                        Чи міг хтось уявити, що, Франческо Пероні, у той далекий 1846 рік, залишив майстерню свого батька-макаронника, щоб продовжити кар'єру виробника пляшок, що за 150 років його пиво стане унікальним і відомим у всьому світі продуктом? Річ у тім, що Франческо пройшов довгий шлях відтоді, як у цієї людини з винятковими підприємницькими здібностями з'явилася ще одна іскра, і він продовжив вечірні години роботи своєї пивоварні, щоб дати більше свободи дій відвідувачам, , які хотіли б пити його пиво. Сьогодні цих проблем більше немає, і в будь-яку пору доби ми можемо купити та випити пляшку цього унікального на весь світ напою.
-                        Пиво Peroni - лагер низького бродіння з безпомилково впізнаваним світло-золотим кольором і помірно гірким смаком, назва якого походить від німецького лагера або складів, де він витримується.
-                        Виготовляється тільки з добірних інгредієнтів, як-от 100% італійський солод, результат особливої якості ячменю, за яким ретельно стежить на всіх етапах ланцюжка постачання. Якість — це італійська пристрасть, зокрема і Peroni. Соломено-жовтий колір, помірно гіркий смак, збалансований хмелевий і солодовий смак.
-                    </p></div>
-                </div>
-
-                <hr class="divider">
-
-                <div class="specs">
-                    <div><span>Об'єм:</span> <strong>0,66 л</strong></div>
-                    <div><span>Географія:</span> <strong>Італія</strong></div>
-                    <div><span>Міцність:</span> <strong>4,7%</strong></div>
-                    <div><span>Виробник:</span> <strong>Peroni Brewery</strong></div>
-                </div>
+                </form>
             </div>
-        </section>
-    </main>
+
+            <hr class="divider">
+
+            <div class="description">
+                <h2>Опис</h2>
+                <div class="description-frame"><p>
+                    {{ item.description }}
+                </p></div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="specs">
+                <div><span>Об'єм:</span> <strong>0,66 л</strong></div>
+                <div><span>Географія:</span> <strong>{{ item.geography }}</strong></div>
+                <div><span>Міцність:</span> <strong>{{ item.strength }}%</strong></div>
+                <div><span>Виробник:</span> <strong>{{ item.producer }}</strong></div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateLocalQuantity = (itemId, action) => {
+            const quantityElement = document.getElementById(`quantity-${itemId}`);
+            let currentQuantity = parseInt(quantityElement.textContent, 10);
+
+            if (action === 'increase') {
+                quantityElement.textContent = currentQuantity + 1;
+            } else if (action === 'decrease' && currentQuantity > 1) {
+                quantityElement.textContent = currentQuantity - 1;
+            }
+        };
+
+        document.querySelectorAll('.decrease-quantity, .increase-quantity').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const button = event.target;
+                const itemId = button.getAttribute('data-item-id');
+                const action = button.classList.contains('decrease-quantity') ? 'decrease' : 'increase';
+                updateLocalQuantity(itemId, action);
+            });
+        });
+
+        document.querySelector('.buy').addEventListener('click', (event) => {
+            event.preventDefault();
+            const button = event.target;
+            const itemId = button.closest('form').action.split('/').pop();
+            const quantity = parseInt(document.getElementById(`quantity-${itemId}`).textContent, 10);
+
+            const hiddenInput = document.getElementById(`form-quantity-${itemId}`);
+            hiddenInput.value = quantity;
+
+            button.closest('form').submit();
+        });
+    });
+
+
+</script>
 </body>
+
 </html>

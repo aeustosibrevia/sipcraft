@@ -37,6 +37,7 @@
             <hr class="section-line">
             <div class="product-grid">
                 {% for el in data %}
+                <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
                 <div class="product">
                     <img src="{{ el.image_url }}" alt="{{ el.name }}"  class="product-image">
                     <div class="product-info">
@@ -51,7 +52,7 @@
                             <button type="submit" class="icon"><img src="/static/picture/header/basket.png" alt="Add to Cart" class="icon"></button>
                         </form>
                     </div>
-                </div>
+                </div></a>
                 {% endfor %}
             </div>
         </section>

@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 
+#  пофіксити візуал з flash повідомленнями, всі відображення перекласти українською
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
@@ -29,8 +30,6 @@ class Item(db.Model):
     strength = db.Column(db.Float, nullable=False)
     producer = db.Column(db.String(80), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
-
-
 
     def __repr__(self):
         return self.name
@@ -91,7 +90,6 @@ def signup():
             flash('Passwords do not match', 'error')
             return redirect(url_for('signup'))
 
-
         new_user = User(username=username, email=email)
         new_user.set_password(password)
         db.session.add(new_user)
@@ -105,7 +103,6 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -122,12 +119,14 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     flash('You are now logged out', 'success')
     return redirect(url_for('index'))
+
 
 @app.route('/category')  # category == beer
 def category():
@@ -158,6 +157,7 @@ def cognac():
         items = []
     return render_template('cognac.html', data=items)
 
+
 @app.route('/gin')
 def gin():
     gin_category = Category.query.filter_by(name='Джин').first()
@@ -166,6 +166,7 @@ def gin():
     else:
         items = []
     return render_template('gin.html', data=items)
+
 
 @app.route('/wine')
 def wine():
@@ -176,45 +177,50 @@ def wine():
         items = []
     return render_template('wine.html', data=items)
 
-@app.route('/add_to_cart/<int:item_id>', methods=['GET', 'POST'])
+
+@app.route('/add_to_cart/<int:item_id>', methods=['POST'])
 def add_to_cart(item_id):
     if 'user_id' not in session:
         flash('Please log in to add items to your cart.', 'error')
         return redirect(url_for('login'))
 
     user_id = session['user_id']
-    cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
 
-    if cart_item:
-
-        cart_item.quantity += 1
+    if request.is_json:
+        data = request.get_json()
+        quantity = data.get('quantity', 1)
     else:
+        try:
+            quantity = int(request.form.get('quantity', 1))
+        except ValueError:
+            flash('Invalid quantity. Please try again.', 'error')
+            return redirect(request.referrer or url_for('index'))
 
-        cart_item = CartItem(user_id=user_id, item_id=item_id, quantity=1)
+    if quantity < 1:
+        flash('Invalid quantity. Cannot add to cart.', 'error')
+        return redirect(request.referrer or url_for('index'))
+
+    cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+    if cart_item:
+        cart_item.quantity += quantity
+    else:
+        cart_item = CartItem(user_id=user_id, item_id=item_id, quantity=quantity)
         db.session.add(cart_item)
 
     db.session.commit()
     flash('Item added to cart successfully.', 'success')
-
-    referer = request.referrer
-    if referer:
-        return redirect(referer)
-    else:
-        return redirect(url_for('index'))
+    return redirect(request.referrer or url_for('index'))
 
 
 @app.route('/cart')
 def cart():
-
     user_id = session.get('user_id')
 
     if not user_id:
         flash('Please log in to view your cart.', 'error')
         return redirect(url_for('login'))
 
-
     cart_items = CartItem.query.filter_by(user_id=user_id).all()
-
 
     total_price = sum(item.item.price * item.quantity for item in cart_items)
 
@@ -223,6 +229,7 @@ def cart():
         data=cart_items,
         total_price=total_price
     )
+
 
 @app.route('/update_quantity', methods=['POST'])
 def update_quantity():
@@ -247,10 +254,11 @@ def update_quantity():
     elif action == 'decrease' and cart_item.quantity > 1:
         cart_item.quantity -= 1
     else:
-        db.session.delete(cart_item)  # Удаляем товар из корзины, если количество стало 0
+        db.session.delete(cart_item)
 
     db.session.commit()
     return jsonify({'success': True})
+
 
 @app.route('/remove_from_cart', methods=['POST', 'GET'])
 def remove_from_cart():
@@ -273,6 +281,14 @@ def remove_from_cart():
     db.session.commit()
 
     return jsonify({'success': True})
+
+
+@app.route('/product/<int:item_id>')
+def item_page(item_id):
+    item = Item.query.get(item_id)
+    if not item:
+        return render_template('404.html'), 404
+    return render_template('product.html', item=item)
 
 
 if __name__ == '__main__':
