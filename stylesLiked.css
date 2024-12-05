@@ -51,6 +51,11 @@ body {
     color: #482817;
 }
 
+a{  
+    text-decoration: none;
+    color: inherit;    
+}
+
 header {
     background-color: #F5EBDA;
     padding: 20px 0;
@@ -128,10 +133,6 @@ nav ul li .icon {
     height: 24px;
 }
 
-.select{
-    color: #AF6900;
-}
-
 .popup {
     position: absolute;
     top: 80px;
@@ -190,128 +191,148 @@ nav ul li .icon {
     display: none;
 }
 
-.about-us {
-    display: flex;
-    padding: 40px 20px;
+.section-line {
+    border: none; 
+    height: 1px; 
+    background-color: #AF6900; 
+    width: 240px; 
+    margin: 20px auto; 
 }
 
-.image-container {
-    width: 30%;
-    padding: 20px;
+.category-selection {
+    padding: 40px 0;
+    text-align: center; 
 }
 
-.image-container img {
-    width: 85%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.history {
-    width: 60%;
-    padding: 40px 50px;
-    margin: 20px 50px;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgb(255, 255, 255, 0.8)), url('images/bottle.png');
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-}
-
-.history h2 {
+.category-selection h2 {
     font-size: 28px;
-    position: relative;
-    text-align: center;
 }
 
-.history hr {
-    border: none;
-    border-top: 1px solid #AF6900;
-    width: 200px;
-    margin: 10px auto;
-}
-
-.history p {
-    font-size: 18px;
-    line-height: 1.6;
-    text-align: center;
-    margin-top: 30px;
-}
-
-.name-origin {
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.name-origin h2 {
-    font-size: 32px;
-    color: #AF6900;
-    margin-bottom: 30px;
-}
-
-.name-origin p {
-    font-size: 18px;
-    margin-bottom: 30px;
-    text-align: center;
-    max-width: 600px;
-    margin: 30px auto;
-}
-
-.name-meaning {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     gap: 20px;
+    width: 95%;
+    margin: 50px auto;   
+}
+
+.product {
+    display: flex;
+    align-items: stretch;
+    background-color: #F5EBDA;
+    padding: 20px;
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+    position: relative;
+    min-width: 330px;
+    max-width: 370px;
+}
+
+.content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h4{
+    text-align: left;
+    word-break: break-word;
+    font-size: 24px;
+    margin: 5px 0;
+    color: #482817;
+}
+
+.sub-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.product-image {
+    height: 200px;
+    width: auto;
+    margin-right: 20px;
+}
+
+.product-info {
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
     margin-top: 20px;
 }
 
-.name-meaning .sip,
-.name-meaning .craft {
-    width: 40%;
-}
-
-.name-meaning .divider {
-    width: 2px;
-    height: 200px;
-    background-color: #AF6900;
-    align-self: stretch;
-    margin: 0 20px;
-}
-
-.name-meaning .sip {
-    text-align: right;
-    padding-right: 10px;
-}
-
-.name-meaning .craft {
-    text-align: left;
-    padding-left: 10px;
-}
-
-.name-meaning h3 {
-    font-size: 32px;
+.product-info .category_prod {
+    font-style: italic;
+    font-size: 20px;
     color: #AF6900;
-    margin-bottom: 10px;
 }
 
-.name-meaning .sip p,
-.name-meaning .craft p {
-    font-size: 18px;
-    line-height: 1.6;
-    text-align: justify;
+.product-info .in-stock {   
+    font-style: italic;
+    font-size: 14px;
+    color: rgb(2, 105, 2);
+    margin: 5px 0;
 }
 
-.name-meaning .sip p{
-    text-align: right;
+.product-info .price {
+    font-size: 24px;
+    color: #482817;
+    font-weight: bold;
+    margin: 0 1px;    
 }
 
-.name-meaning .craft p{
-    text-align: left;
+.icons {
+    display: flex;
+    align-items: end; 
+    position: static;
+}
+
+.icons .icon {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-now {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.buy-now h2 {
+    font-size: 28px;
+    color: #AF6900;
+    margin-bottom: 40px; 
+}
+
+.buy-now .cart-button {
+    background-color: #AF690059;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 70px;
+    font-size: 24px;
+    cursor: pointer;
+    
 }
 
 footer {
+    margin-top: 50px;
     background-color: #E2C89F;
     padding: 20px 0;
-    margin-top: 50px;
 }
 
 .footer-container {
@@ -361,7 +382,8 @@ footer {
     object-fit: contain; 
 }
 
-@media (max-width: 768px) {
+/* Адаптивність для мобільних пристроїв (до 768px ширини) */
+@media only screen and (max-width: 768px) {
     .header-container {
         flex-direction: column;
         align-items: flex-start;
@@ -385,37 +407,10 @@ footer {
         right: 20px;
     }
 
-    .about-us {
-        flex-direction: column;
-        align-items: center;
+    .product-grid {
+        margin: 40px 2px ;   
     }
 
-    .image-container, .history {
-        width: 80%;
-        padding: 20px 10px;
-    }
-
-    .name-meaning {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .name-meaning .sip, .name-meaning .craft {
-        width: 100%;
-        text-align: center;
-        padding: 0;
-    }
-
-    .name-meaning .divider {
-        width: 100%;
-        height: 2px;
-        margin: 0 0;
-    }
-
-    .name-meaning .sip p,
-    .name-meaning .craft p{
-        text-align: justify;
-    }
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -437,17 +432,14 @@ footer {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Адаптивність для планшетів (від 768px до 1024px ширини) */
+@media only screen and (min-width: 768px) and (max-width: 1025px) {
     .header-container {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    .name-meaning .sip, .name-meaning .craft {
-        width: 45%;
-    }
-    
     .footer-container {
         flex-wrap: wrap;
         justify-content: space-around;
@@ -463,3 +455,4 @@ footer {
         width: 35px;
     }
 }
+

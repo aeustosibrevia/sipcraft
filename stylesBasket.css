@@ -4,14 +4,55 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 12px;    
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::-webkit-scrollbar-button {
+    background: #ccc; 
+    border-radius: 50%; 
+}
+  
+::-webkit-scrollbar-button:hover {
+    background: #999; 
+}
+  
+::-webkit-scrollbar-button:increment {
+    background: url('/picture/main/Arrow-down.svg') no-repeat center center; 
+    background-size: 8px 8px;
+}
+  
+::-webkit-scrollbar-button:decrement {
+    background: url('/picture/main/Arrow-up.svg') no-repeat center center; 
+    background-size: 8px 8px;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/FixelText-Regular.woff2') format('woff2');
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'MyCustomFont';
     background-color: #fef7f1;
-    color: #4a4a4a;
+    color: #482817;
 }
 
 header {
-    background-color: #f4ecd8;
+    background-color: #F5EBDA;
     padding: 20px 0;
 }
 
@@ -24,9 +65,10 @@ header {
 }
 
 .logo h1 {
-    font-size: 28px;
-    color: #5a5a5a;
-    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    color: inherit;
+    font-style: italic;
+    font-family: 'MyCustomFont', serif;
 }
 
 .logo a{  
@@ -77,14 +119,71 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #6e6e6e;
-    font-weight: bold;
-    font-size: 16px;
+    color: inherit;
+    font-size: 18px;
 }
 
 nav ul li .icon {
     width: 24px;
     height: 24px;
+}
+
+.popup {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: #E2C89F; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+    color: #482817;
+}
+
+.popup-content h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popup-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #AF6900;
+}
+
+.popup-content hr {
+    margin: 10px 0 0 0;
+    border: 0;
+    height: 1px;
+    background-color: #AF6900;
+}
+
+.popup-content button {
+    width: 100%; 
+    padding: 10px 0; 
+    background-color: #AF690059; 
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px 0; 
+    text-align: center; 
+}
+
+.popup-content button:hover {
+    background-color: #af6900a8;
+}
+
+.hidden {
+    display: none;
 }
 
 .container {
@@ -123,12 +222,12 @@ nav ul li .icon {
 }
 
 .cart-table th {
-    font-weight: bold;
-    color: #5C4033;
+    font-style: italic;
+    color: #AF6900;
 }
 
 .cart-table  tr {
-    border-bottom: 1px solid #D6C4B0; 
+    border-bottom: 1px solid #AF6900; 
 }
 
 .cart-table .product-info {
@@ -152,17 +251,18 @@ nav ul li .icon {
 }
 
 .cart-table .quantity button {
-    border: 1px solid #D6C4B0;
+    border: 1px solid #9E845C;
+    color: #9E845C;
     background-color: #FFF;
-    padding: 3px 5px;
+    padding: 3px 8px;
     cursor: pointer;
-    border-radius: 100%;
+    border-radius: 75%;
 }
 
 .cart-table .remove-button {
     background: none;
     border: none;
-    color: #C49A6C;
+    color: #AF6900;
     font-size: 1.5em;
     cursor: pointer;
     line-height: 1; 
@@ -171,12 +271,12 @@ nav ul li .icon {
 
 .order-summary {
     flex: 1;
-    border: 1px solid #D6C4B0;
+    border: 1px solid #AF6900;
     border-radius: 10px;
     padding: 20px;
     background-color: #FFF;
     text-align: center;
-    max-height: 480px; 
+    max-height: 510px; 
     overflow-y: auto;  
     flex-shrink: 0;  
 }
@@ -188,7 +288,7 @@ nav ul li .icon {
 
 .order-summary .summary-delivery {
     height: 1px;
-    background-color: #C49A6C; 
+    background-color: #AF6900; 
     border: none; 
     width: 100%; 
     margin: 10px auto 40px auto; 
@@ -197,7 +297,7 @@ nav ul li .icon {
 
 .order-summary hr {
     height: 1px;
-    background-color: #C49A6C; 
+    background-color: #AF6900; 
     border: none; 
     width: 100%; 
     margin: 10px auto 20px auto; 
@@ -240,7 +340,7 @@ nav ul li .icon {
     width: 100%;
     padding: 10px;
     text-align: center;
-    background-color: #C49A6C;
+    background-color: #AF690059;
     color: #FFF;
     border: none;
     border-radius: 5px;
@@ -251,6 +351,59 @@ nav ul li .icon {
 
 .pay-button:hover {
     background-color: #A87C4E;
+}
+
+footer {
+    background-color: #E2C89F;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+    color: #AF6900;
+    text-decoration: none;
+}
+
+.location{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.social-icons a {
+    margin-right: 10px;
+}
+
+.social-icons img {
+    width: 40px;
+    object-fit: contain; 
 }
 
 /* Медіа-запит для маленьких екранів (до 600px) */
@@ -265,6 +418,19 @@ nav ul li .icon {
         margin: 10px 0;
     }
 
+    nav ul li a {
+        font-size: 13px;
+    }
+
+    nav ul li{
+        margin-left: 15px;
+    }
+    
+    .popup {
+        top: 160px;
+        right: 20px;
+    }
+    
     .container {
         flex-direction: column;
         padding: 10px;
@@ -299,6 +465,26 @@ nav ul li .icon {
 
     .pay-button {
         font-size: 1em;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .footer-column {
+        margin: 20px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-column ul li a {
+        display: block;
+    }
+
+    .social-icons img {
+        width: 30px;
     }
 }
 
@@ -338,5 +524,20 @@ nav ul li .icon {
 
     .pay-button {
         font-size: 1.2em;
+    }
+
+    .footer-container {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0 30px;
+    }
+
+    .footer-column {
+        flex: 0 1 calc(50% - 60px);
+        margin: 20px;
+    }
+
+    .social-icons img {
+        width: 35px;
     }
 }

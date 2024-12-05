@@ -12,17 +12,36 @@
             <div class="logo">
                 <a href="index.html"><h1>SipCraft</h1></a>
             </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Головна</a></li>
                     <li><a href="categories.html">Магазин</a></li>
                     <li><a href="aboutus.html">Про нас</a></li>
-                    <li><a href="#"><img src="images/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="login.html"><img src="images/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="liked.html"><img src="images/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="#"><img src="images/user.png" id = "userIcon" alt="User" class="icon"></a></li>
                     <li><a href="basket.html"><img src="images/basket.png" alt="User" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
+        <div id="userPopup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popupMessage"></p>
+
+                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+                <hr id="separator" class="hidden">
+                <p id="userInfo" class="hidden">ПІБ користувача</p>                
+                
+                <button id="loginBtn">Увійти</button>
+                <button id="registerBtn">Зареєструватися</button>
+        
+                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+            </div>
+        </div>
+        
     </header>
     <main class="main-content">
         <section class="login-section">
@@ -39,8 +58,54 @@
             </div>
         </section>
     </main>
-    <footer class="site-footer">
-        <p>&copy; 2024 Назва Сайту. Усі права захищені.</p>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Інформація</h4>
+                <ul>
+                    <li><a href="#">Про нас</a></li>
+                    <li><a href="#">Доставка і оплата</a></li>
+                    <li><a href="#">Політика конфіденційності</a></li>
+                    <li><a href="#">Угода користувача</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Контакти</h4>
+                <ul>
+                    <li>Email: <a href="mailto:sipcraft.store@gmail.com">sipcraft.store@gmail.com</a></li>
+                    <li>Instagram: <a href="#">@sipcraft_store</a></li>
+                    <li>Телефон: <a href="#">+380XX XXXXXX</a></li>
+                    <li>Наша адреса: <a href="#">вул. Сергія Зулінського, 50, м. Вінниця</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Доставка</h4>
+                <ul>
+                    <li>Будні: <a>з 12:00 до 20:00</a></li>
+                    <li>Вихідні: <a>з 12:00 до 20:00</a></li>
+                </ul>
+                
+            </div>
+            <div class="footer-column">
+                <h4>Графік роботи call-центру:</h4>
+                <ul>
+                    <li>Будні: <a>з 9:00 до 19:00</a></li>
+                    <li>Вихідні: <a>з 10:00 до 18:00</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Слідкуй за новинами</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="picture/about us/Picture2.png" alt="Email"></a>
+                    <a href="#"><img src="picture/about us/Picture5.png" alt="Instagram"></a>
+                    <a href="#"><img src="picture/about us/Picture1.png" alt="Telegram"></a>
+                    <a href="#"><img src="picture/about us/Picture4.png" alt="WhatsApp"></a>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <script src="scriptsUser.js"></script> 
 </body>
 </html>
