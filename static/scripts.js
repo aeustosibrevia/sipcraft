@@ -11,8 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return 1; 
         } else if (screenWidth < 1024) {
             return 2; 
-        } else {
+        } else if(screenWidth < 1920){
             return 4; 
+        }
+        else{
+            return 5;
         }
     }
 
@@ -29,14 +32,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateArrowVisibility() {
+
         if (currentStartIndex === 0) {
             leftScrollBtn.style.display = 'none'; 
         } else {
             leftScrollBtn.style.display = 'block'; 
         }
-
         if (currentStartIndex + visibleCount >= categories.length) {
-            rightScrollBtn.style.display = 'none'; 
+            rightScrollBtn.style.display = 'none';
+
         } else {
             rightScrollBtn.style.display = 'block'; 
         }
@@ -64,3 +68,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateVisibleCategories();
 });
+
+
