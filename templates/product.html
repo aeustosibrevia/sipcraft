@@ -49,7 +49,11 @@
                     <button class="increase-quantity" data-item-id="{{ item.id }}">+</button>
                 </div>
                 <button class="add-to-favorites">
+                    {% if is_liked %}
+                    <img src="/static/picture/header/likedPaint.png" alt="Додати до улюбленого">
+                    {% else %}
                     <img src="/static/picture/header/liked.png" alt="Додати до улюбленого">
+                    {% endif %}
                 </button>
                 <form action="/add_to_cart/{{ item.id }}" method="POST" style="display: inline;">
                     <input type="hidden" name="quantity" id="form-quantity-{{ item.id }}" value="1">

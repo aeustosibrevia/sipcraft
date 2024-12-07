@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipCraft</title>
+    <link rel="stylesheet" href="/static/stylesLiked.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><h1>SipCraft</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/categories">Магазин</a></li>
+                    <li><a href="/aboutus">Про нас</a></li>
+                    <li><a href="/liked"><img src="images/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="#"><img src="images/user.png" id = "userIcon" alt="User" class="icon"></a></li>
+                    <li><a href="/cart"><img src="images/basket.png" alt="User" class="icon"></a></li>
+                </ul>
+            </nav>
+        </div>
+        <!--<div id="userPopup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popupMessage"></p>
+                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+                <hr id="separator" class="hidden">
+                <p id="userInfo" class="hidden">ПІБ користувача</p>
+
+                <button id="loginBtn">Увійти</button>
+                <button id="registerBtn">Зареєструватися</button>
+
+                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+            </div>
+        </div>-->
+
+    </header>
+
+    <main>
+        <section class="category-selection">
+            <hr class="section-line">
+            <h2>Список бажань</h2>
+            <hr class="section-line">
+            <div class="product-grid">
+                {% for el in data %}
+                <a href="product/{{el.item.id}}">
+                    <div class="product">
+                        <img src="{{el.item.image_url}}" alt="{{ el.item.name }}" class="product-image">
+                        <div class="content">
+                            <h4>{{ el.item.name }}</h4>
+                            <div class="sub-container">
+                                <div class="product-info">
+                                    <p class="category_prod">{{ el.item.category.name }}</p>
+                                    <p class="in-stock">IN STOCK</p>
+                                    <p class="price">₴{{ "%.2f"|format(el.item.price) }}</p>
+                                </div>
+                                <div class="icons">
+                                    <form action="/remove_from_liked/{{ el.item.id }}" method="POST" style="display: inline;">
+                                        <button class="icon"><img src="/static/picture/header/likedPaint.png" alt="Remove from Wishlist" class="icon"></button>
+                                    </form>
+                                    <form action="/add_to_cart/{{ el.item.id }}" method="post">
+                                        <button class="icon"><img src="/static/picture/header/basket.png" alt="Add to Cart" class="icon"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
+        </section>
+        <section class="buy-now">
+            <h2>Придбай вже зараз!</h2>
+            <button class="cart-button" onclick="location.href='basket.html';">Корзина</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Інформація</h4>
+                <ul>
+                    <li><a href="#">Про нас</a></li>
+                    <li><a href="#">Доставка і оплата</a></li>
+                    <li><a href="#">Політика конфіденційності</a></li>
+                    <li><a href="#">Угода користувача</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Контакти</h4>
+                <ul>
+                    <li>Email: <a href="mailto:sipcraft.store@gmail.com">sipcraft.store@gmail.com</a></li>
+                    <li>Instagram: <a href="#">@sipcraft_store</a></li>
+                    <li>Телефон: <a href="#">+380XX XXXXXX</a></li>
+                    <li>Наша адреса: <a href="#">вул. Сергія Зулінського, 50, м. Вінниця</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Доставка</h4>
+                <ul>
+                    <li>Будні: <a>з 12:00 до 20:00</a></li>
+                    <li>Вихідні: <a>з 12:00 до 20:00</a></li>
+                </ul>
+
+            </div>
+            <div class="footer-column">
+                <h4>Графік роботи call-центру:</h4>
+                <ul>
+                    <li>Будні: <a>з 9:00 до 19:00</a></li>
+                    <li>Вихідні: <a>з 10:00 до 18:00</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Слідкуй за новинами</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="picture/about us/Picture2.png" alt="Email"></a>
+                    <a href="#"><img src="picture/about us/Picture5.png" alt="Instagram"></a>
+                    <a href="#"><img src="picture/about us/Picture1.png" alt="Telegram"></a>
+                    <a href="#"><img src="picture/about us/Picture4.png" alt="WhatsApp"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script></script>
+</body>
+</html>

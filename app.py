@@ -57,11 +57,40 @@ class CartItem(db.Model):
 
     item = db.relationship('Item', backref='cart_items', lazy=True)
 
+class FavoriteItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    user = db.relationship('User', backref='favorites', lazy=True)
+    item = db.relationship('Item', lazy=True)
+
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
+def check_liked_items(items):
+    liked_items_set = set()
+    if 'user_id' in session:
+        user_id = session['user_id']
+        liked_items_set = {
+            favorite.item_id for favorite in FavoriteItem.query.filter_by(user_id=user_id).all()
+        }
+
+    data = []
+    for item in items:
+        data.append({
+            'id': item.id,
+            'name': item.name,
+            'price': item.price,
+            'description': item.description,
+            'image_url': item.image_url,
+            'is_liked': item.id in liked_items_set
+        })
+
+    return data
 
 @app.route('/about')
 def about():
@@ -135,7 +164,9 @@ def category():
         items = Item.query.filter_by(category=beer_category).all()
     else:
         items = []
-    return render_template('category.html', data=items)
+
+    data = check_liked_items(items)
+    return render_template('category.html', data=data)
 
 
 @app.route('/whiskey')
@@ -145,7 +176,11 @@ def whiskey():
         items = Item.query.filter_by(category=whiskey_category).all()
     else:
         items = []
-    return render_template('whiskey.html', data=items)
+
+    data = check_liked_items(items)
+
+    return render_template('whiskey.html', data=data)
+
 
 
 @app.route('/cognac')
@@ -155,7 +190,9 @@ def cognac():
         items = Item.query.filter_by(category=cognac_category).all()
     else:
         items = []
-    return render_template('cognac.html', data=items)
+
+    data = check_liked_items(items)
+    return render_template('cognac.html', data=data)
 
 
 @app.route('/gin')
@@ -165,7 +202,9 @@ def gin():
         items = Item.query.filter_by(category=gin_category).all()
     else:
         items = []
-    return render_template('gin.html', data=items)
+
+    data = check_liked_items(items)
+    return render_template('gin.html', data=data)
 
 
 @app.route('/wine')
@@ -175,7 +214,9 @@ def wine():
         items = Item.query.filter_by(category=wine_category).all()
     else:
         items = []
-    return render_template('wine.html', data=items)
+
+    data = check_liked_items(items)
+    return render_template('wine.html', data=data)
 
 
 @app.route('/add_to_cart/<int:item_id>', methods=['POST'])
@@ -288,7 +329,72 @@ def item_page(item_id):
     item = Item.query.get(item_id)
     if not item:
         return render_template('404.html'), 404
-    return render_template('product.html', item=item)
+
+    is_liked = False
+    if 'user_id' in session:
+        user_id = session['user_id']
+        is_liked = FavoriteItem.query.filter_by(user_id=user_id, item_id=item.id).first() is not None
+
+    return render_template('product.html', item=item, is_liked=is_liked)
+
+
+
+
+@app.route('/add_to_liked/<int:item_id>', methods=['POST'])
+def liked_item(item_id):
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'message': 'Будь ласка, увійдіть, щоб додавати товари в список бажаного.'}), 403
+
+    user_id = session['user_id']
+
+    favorite_item = FavoriteItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+    if favorite_item:
+        db.session.delete(favorite_item)
+        db.session.commit()
+        return jsonify({'success': True, 'liked': False})
+    else:
+        favorite_item = FavoriteItem(user_id=user_id, item_id=item_id)
+        db.session.add(favorite_item)
+        db.session.commit()
+        return jsonify({'success': True, 'liked': True})
+
+
+
+@app.route('/liked')
+def liked():
+    user_id = session.get('user_id')
+
+    if not user_id:
+        flash('Please log in to view your favorites.', 'error')
+        return redirect(url_for('login'))
+
+    liked_items = FavoriteItem.query.filter_by(user_id=user_id).all()
+
+    return render_template(
+        'liked.html',
+        data=liked_items
+    )
+
+
+@app.route('/remove_from_liked/<int:item_id>', methods=['POST'])
+def remove_from_liked(item_id):
+    if 'user_id' not in session:
+        flash('Будь ласка, увійдіть у свій акаунт, щоб видалити товар зі списку бажань.', 'error')
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+
+    liked_item = FavoriteItem.query.filter_by(user_id=user_id, item_id=item_id).first()
+
+    if not liked_item:
+        flash('Товар не знайдено у списку бажань.', 'error')
+        return redirect(url_for('liked'))
+
+    db.session.delete(liked_item)
+    db.session.commit()
+
+    flash('Товар успішно видалено зі списку бажань.', 'success')
+    return redirect(url_for('liked'))
 
 
 if __name__ == '__main__':

@@ -360,6 +360,7 @@ footer {
     object-fit: contain; 
 }
 
+
 /* Адаптивність для мобільних пристроїв (до 768px ширини) */
 @media only screen and (max-width: 768px) {
     .header-container {

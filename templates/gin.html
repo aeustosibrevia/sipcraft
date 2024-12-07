@@ -8,38 +8,38 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/"><h1>SipCraft</h1></a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Пошук...">
-                <button class="search-button">Search</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">Головна</a></li>
-                    <li><a href="/categories">Магазин</a></li>
-                    <li><a href="/about">Про нас</a></li>
-                    <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
-                    <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
-                </ul>
-            </nav>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/"><h1>SipCraft</h1></a>
         </div>
-    </header>
+        <div class="search-bar">
+            <input type="text" placeholder="Пошук...">
+            <button class="search-button">Search</button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/categories">Магазин</a></li>
+                <li><a href="/about">Про нас</a></li>
+                <li><a href="#"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
+                <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <main>
-        <section class="category-selection">
-            <hr class="section-line">
-            <h2>Джин</h2>
-            <hr class="section-line">
-            <div class="product-grid">
-                {% for el in data %}
-                <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
+<main>
+    <section class="category-selection">
+        <hr class="section-line">
+        <h2>Джин</h2>
+        <hr class="section-line">
+        <div class="product-grid">
+            {% for el in data %}
+            <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
                 <div class="product">
-                    <img src="{{ el.image_url }}" alt="{{ el.name }}"  class="product-image">
+                    <img src="{{ el.image_url }}" alt="{{ el.name }}" class="product-image">
                     <div class="product-info">
                         <h4>{{ el.name }}</h4>
                         <p class="category">Джин</p>
@@ -47,16 +47,29 @@
                         <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
                     </div>
                     <div class="icons">
-                        <button class="icon"><img src="/static/picture/header/liked.png" alt="Wishlist" class="icon"></button>
+                        <form action="/add_to_liked/{{ el.id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="icon like-button">
+                                {% if el.is_liked %}
+                                <img src="/static/picture/header/likedPaint.png" alt="Add to Liked"
+                                     class="icon like-icon"
+                                     data-liked="true">
+                                {% else %}
+                                <img src="/static/picture/header/liked.png" alt="Add to Liked" class="icon like-icon"
+                                     data-liked="false">
+                                {% endif %}
+                            </button>
+                        </form>
                         <form action="/add_to_cart/{{ el.id }}" method="POST" style="display: inline;">
-                            <button type="submit" class="icon"><img src="/static/picture/header/basket.png" alt="Add to Cart" class="icon"></button>
+                            <button type="submit" class="icon"><img src="/static/picture/header/basket.png"
+                                                                    alt="Add to Cart" class="icon"></button>
                         </form>
                     </div>
-                </div></a>
-                {% endfor %}
-            </div>
-        </section>
-    </main>
-
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<script src="/static/scriptsLiked.js"></script>
 </body>
 </html>

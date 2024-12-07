@@ -47,7 +47,18 @@
                         <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
                     </div>
                     <div class="icons">
-                        <button class="icon"><img src="/static/picture/header/liked.png" alt="Wishlist" class="icon"></button>
+                        <form action="/add_to_liked/{{ el.id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="icon like-button">
+                                {% if el.is_liked %}
+                                <img src="/static/picture/header/likedPaint.png" alt="Add to Liked"
+                                     class="icon like-icon"
+                                     data-liked="true">
+                                {% else %}
+                                <img src="/static/picture/header/liked.png" alt="Add to Liked" class="icon like-icon"
+                                     data-liked="false">
+                                {% endif %}
+                            </button>
+                        </form>
                         <form action="/add_to_cart/{{ el.id }}" method="POST" style="display: inline;">
                             <button type="submit" class="icon"><img src="/static/picture/header/basket.png" alt="Add to Cart" class="icon"></button>
                         </form>
@@ -57,6 +68,6 @@
             </div>
         </section>
     </main>
-
+<script src="/static/scriptsLiked.js"></script>
 </body>
 </html>
