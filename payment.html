@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipCraft - Корзина</title>
+    <link rel="stylesheet" href="stylesPayment.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>SipCraft</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук...">
+                <button class="search-button">Search</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="categories.html">Магазин</a></li>
+                    <li><a href="aboutus.html">Про нас</a></li>
+                    <li><a href="liked.html"><img src="images/liked.png" alt="Cart" class="icon"></a></li>
+                    <li><a href="#"><img src="images/user.png" id = "userIcon" alt="User" class="icon"></a></li>
+                    <li><a href="basket.html"><img src="images/basket.png" alt="User" class="icon"></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="userPopup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popupMessage"></p>
+
+                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+                <hr id="separator" class="hidden">
+                <p id="userInfo" class="hidden">ПІБ користувача</p>                
+                
+                <button id="loginBtn">Увійти</button>
+                <button id="registerBtn">Зареєструватися</button>
+        
+                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+            </div>
+        </div>
+        
+    </header>
+
+    <main>
+        <div class="payment-container">
+
+            <h1 class="payment-title">Оплата</h1>          
+
+            <div class="payment-left-section">
+
+              <div class="payment-method">
+                <h2 class="section-title">Спосіб оплати</h2>
+                <label class="radio-label">
+                  <input type="radio" name="payment-method" value="cash" onchange="togglePaymentFields()" /> Готівкою
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="payment-method" value="card" onchange="togglePaymentFields()" checked /> Карткою онлайн
+                </label>
+                <div id="card-info" class="card-info">
+                    <label class="input-label">Номер карти</label>
+                    <input type="text" placeholder="Введіть номер карти" class="card-input" />
+                    
+                    <div class="inline-fields">
+                      <div>
+                        <label class="input-label">Термін дії</label>
+                        <input type="text" placeholder="MM/YY" class="card-input" />
+                      </div>
+                      <div>
+                        <label class="input-label">CVV</label>
+                        <input type="text" placeholder="XXX" class="card-input" />
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          
+              <div class="contact-info">
+                <h2 class="section-title">Контактні дані отримувача</h2>
+                <label class="radio-label">
+                    <input type="radio" name="receiver" value="self" onchange="togglePayeeFields()" /> Я
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="receiver" value="other" onchange="togglePayeeFields()" checked /> Інша особа
+                </label>
+                <div id="payee-info" class="inline-fields">
+                    <div class="field">
+                        <label for="first-name" class="input-label">Ім'я</label>
+                        <input type="text" id="first-name" placeholder="Введіть ім'я" class="text-input" />
+                    </div>
+                    <div class="field">
+                        <label for="last-name" class="input-label">Прізвище</label>
+                        <input type="text" id="last-name" placeholder="Введіть прізвище" class="text-input" />
+                    </div>
+                    <div class="field">
+                        <label for="phone" class="input-label">Телефон</label>
+                        <input type="text" id="phone" placeholder="+38 0" class="text-input" />
+                    </div>
+                </div>
+            </div>
+            
+              
+              <div class="comment-section">
+                <h2 class="section-title">Коментар</h2>
+                <textarea placeholder="Додайте коментар до замовлення" class="comment-textarea"></textarea>
+              </div>
+            </div>
+
+            <div class="order-summary">
+              <h2 class="section-title">Інформація про замовлення</h2>
+              <div class="summary-line">
+                <p class="order-summary-item">Підсумок:</p> 
+                <p class="order-summary-item">4118 ₴</p>
+              </div>
+              <div class="summary-line">
+                <p class="order-summary-item">Доставка:</p>
+                <p class="order-summary-item">9 ₴</p>
+              </div>
+              <hr class="order-summary-divider" />
+              <div class="summary-line">
+                <p class="order-summary-total">Всього:</p>
+                <p class="order-summary-total">4127 ₴</p>
+              </div>
+              <button class="order-submit-button">Оформити замовлення</button>
+            </div>
+          </div>         
+          
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Інформація</h4>
+                <ul>
+                    <li><a href="#">Про нас</a></li>
+                    <li><a href="#">Доставка і оплата</a></li>
+                    <li><a href="#">Політика конфіденційності</a></li>
+                    <li><a href="#">Угода користувача</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Контакти</h4>
+                <ul>
+                    <li>Email: <a href="mailto:sipcraft.store@gmail.com">sipcraft.store@gmail.com</a></li>
+                    <li>Instagram: <a href="#">@sipcraft_store</a></li>
+                    <li>Телефон: <a href="#">+380XX XXXXXX</a></li>
+                    <li>Наша адреса: <a href="#">вул. Сергія Зулінського, 50, м. Вінниця</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Доставка</h4>
+                <ul>
+                    <li>Будні: <a>з 12:00 до 20:00</a></li>
+                    <li>Вихідні: <a>з 12:00 до 20:00</a></li>
+                </ul>
+                
+            </div>
+            <div class="footer-column">
+                <h4>Графік роботи call-центру:</h4>
+                <ul>
+                    <li>Будні: <a>з 9:00 до 19:00</a></li>
+                    <li>Вихідні: <a>з 10:00 до 18:00</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Слідкуй за новинами</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="picture/about us/Picture2.png" alt="Email"></a>
+                    <a href="#"><img src="picture/about us/Picture5.png" alt="Instagram"></a>
+                    <a href="#"><img src="picture/about us/Picture1.png" alt="Telegram"></a>
+                    <a href="#"><img src="picture/about us/Picture4.png" alt="WhatsApp"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scriptsUser.js"></script> 
+    <script src="scriptsPayment.js"></script> 
+</body>
+</html>

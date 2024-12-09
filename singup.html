@@ -50,8 +50,10 @@
                 <h3>Реєстрація нового облікового запису</h3>
                 <p>Щоб створити новий обліковий запис, заповніть форму нижче:</p>
                 <form action="register.php" method="post" style="display: flex; flex-direction: column; max-width: 400px;">
-                    <input type="text" name="new_username" placeholder="Ім'я користувача" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="new_firstusername" placeholder="Ім'я користувача" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="new_lastusername" placeholder="Прізвище користувача" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
                     <input type="phone" name="phone_number" placeholder="Телефон користувача" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="new_login" placeholder="Логін користувача" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
                     <input type="password" name="new_password" placeholder="Пароль" required style="padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
                     <input type="password" name="confirm_password" placeholder="Підтвердіть пароль" required style="padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
                     <button type="submit" class="singup-btn">Зареєструватися</button>
