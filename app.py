@@ -40,6 +40,9 @@ class User(db.Model):
     username = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.Text, nullable=False)
+    first_name = db.Column(db.String(80), nullable=False)
+    second_name = db.Column(db.String(80), nullable=False)
+    phone_number = db.Column(db.String(80), nullable=False)
     isAdmin = db.Column(db.Boolean, default=False, nullable=False)
 
     def set_password(self, password):
@@ -112,6 +115,9 @@ def admin():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
+        first_name = request.form['new_first_name']
+        second_name = request.form['new_second_name']
+        phone_number = request.form['new_phone_number']
         username = request.form['new_username']
         password = request.form['new_password']
         email = request.form['email']
@@ -126,7 +132,7 @@ def signup():
             flash('Passwords do not match', 'error')
             return redirect(url_for('signup'))
 
-        new_user = User(username=username, email=email)
+        new_user = User(username=username, email=email, first_name=first_name, second_name=second_name, phone_number=phone_number)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
