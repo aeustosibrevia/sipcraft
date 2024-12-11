@@ -222,8 +222,7 @@ def wine():
 @app.route('/add_to_cart/<int:item_id>', methods=['POST'])
 def add_to_cart(item_id):
     if 'user_id' not in session:
-        flash('Please log in to add items to your cart.', 'error')
-        return redirect(url_for('login'))
+        return jsonify({'status': 'error', 'message': 'Будь ласка, увійдіть, аби додавати товари до кошика.'}), 401
 
     user_id = session['user_id']
 
@@ -234,12 +233,10 @@ def add_to_cart(item_id):
         try:
             quantity = int(request.form.get('quantity', 1))
         except ValueError:
-            flash('Invalid quantity. Please try again.', 'error')
-            return redirect(request.referrer or url_for('index'))
+            return jsonify({'status': 'error', 'message': 'Неправильна кількість. Спробуйте ще раз.'}), 400
 
     if quantity < 1:
-        flash('Invalid quantity. Cannot add to cart.', 'error')
-        return redirect(request.referrer or url_for('index'))
+        return jsonify({'status': 'error', 'message': 'Неправильна кількість. Неможливо додати до кошика.'}), 400
 
     cart_item = CartItem.query.filter_by(user_id=user_id, item_id=item_id).first()
     if cart_item:
@@ -249,8 +246,8 @@ def add_to_cart(item_id):
         db.session.add(cart_item)
 
     db.session.commit()
-    flash('Item added to cart successfully.', 'success')
-    return redirect(request.referrer or url_for('index'))
+    return jsonify({'status': 'success', 'message': 'Товар успішно додано до кошика'}), 200
+
 
 
 @app.route('/cart')

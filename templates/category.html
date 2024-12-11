@@ -35,15 +35,6 @@
         <hr class="section-line">
         <h2>Пиво</h2>
         <hr class="section-line">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for category, message in messages %}
-            <div class="flash-message {{ category }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
         <div class="product-grid">
             {% for el in data %}
             <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
@@ -81,6 +72,6 @@
     </section>
 </main>
 <script src="/static/scriptsLiked.js"></script>
-
+<script src="/static/scriptsAddToCart.js"></script>
 </body>
 </html>
