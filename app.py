@@ -412,9 +412,8 @@ def remove_from_liked(item_id):
 
 @app.route('/search', methods=['GET'])
 def search():
-    query = request.args.get('q', '').strip()  # Отримуємо параметр пошуку та видаляємо зайві пробіли
+    query = request.args.get('q', '').strip()
     if query:
-        # Пошук по назві, опису та виробнику, враховуючи тільки активні товари
         results = Item.query.filter(
             Item.isActive == True,
             (Item.name.ilike(f'%{query}%') |
