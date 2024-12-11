@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const userIcon = document.querySelector("nav ul li:nth-child(5) a img");
+    let userIcon;
     const popup = document.getElementById("userPopup");
     const popupMessage = document.getElementById("popupMessage");
     const loginBtn = document.getElementById("loginBtn");
@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/api/auth_status")
         .then((response) => response.json())
         .then((data) => {
+            const isAdmin = data.isAdmin;
+            const nthChildValue = isAdmin ? 6 : 5;
+
+            userIcon = document.querySelector(`nav ul li:nth-child(${nthChildValue}) a img`);
+
+            if (userIcon) {
+                userIcon.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    popup.classList.toggle("hidden");
+                });
+            }
+
             if (data.isLoggedIn) {
                 showLoggedInView(data.username);
             } else {
@@ -21,11 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((error) => {
             console.error("Error fetching auth status:", error);
         });
-
-    userIcon.addEventListener("click", (event) => {
-        event.preventDefault();
-        popup.classList.toggle("hidden");
-    });
 
     function showLoggedInView(username) {
         popupMessage.classList.add("hidden");
@@ -74,7 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", (event) => {
-        if (!popup.contains(event.target) && event.target !== userIcon) {
+        if (
+            popup &&
+            (!popup.contains(event.target) && userIcon && event.target !== userIcon)
+        ) {
             popup.classList.add("hidden");
         }
     });

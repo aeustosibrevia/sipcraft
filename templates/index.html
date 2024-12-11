@@ -8,102 +8,105 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/"><h1>SipCraft</h1></a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Пошук...">
-                <button class="search-button">Search</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">Головна</a></li>
-                    <li><a href="/categories">Магазин</a></li>
-                    <li><a href="/about">Про нас</a></li>
-                    <li><a href="/liked"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="#"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
-                    <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
-                </ul>
-            </nav>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/"><h1>SipCraft</h1></a>
         </div>
-        <div id="userPopup" class="popup hidden">
-            <div class="popup-content">
-                <p id="popupMessage"></p>
-
-                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
-                <hr id="separator" class="hidden">
-                <p id="userInfo" class="hidden">ПІБ користувача</p>
-
-                <button id="loginBtn">Увійти</button>
-                <button id="registerBtn">Зареєструватися</button>
-
-                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
-            </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Пошук...">
+            <button class="search-button">Search</button>
         </div>
+        <nav>
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/categories">Магазин</a></li>
+                <li><a href="/about">Про нас</a></li>
+                {% if is_admin %}
+                <li><a href="/admin">Адмін панель</a></li>
+                {% endif %}
+                <li><a href="/liked"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
+                <li><a href="#"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="userPopup" class="popup hidden">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
 
-    </header>
-    <main>
-        <section class="hero">
-            <div class="hero-text">
-                <h2>ALCOHOL TRADITIONS</h2>
-                <h3>Just relax and go with the flow</h3>
-                <p>Створюємо незабутні моменти з кожним ковтком, відкриваючи світ витончених смаків і майстерності.</p>
-                <button onclick="window.location.href='/categories';">GO TO THE SHOP</button>
-            </div>
-            <div class="hero-image">
-                <img src="/static/picture/main/bottle.png" alt="Bottle Image">
-            </div>
-        </section>
+            <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+            <hr id="separator" class="hidden">
+            <p id="userInfo" class="hidden">ПІБ користувача</p>
 
-        <section class="categories">
-            <div class="category-container">
-                <button class="scroll-button left-scroll">&#10094;</button>
+            <button id="loginBtn">Увійти</button>
+            <button id="registerBtn">Зареєструватися</button>
 
-                <div class="category-wrapper">
-                    <a href="/category" class="category">
-                        <div>
-                            <img src="/static/picture/alcohol/beer/hennessy.png" alt="Пиво">
-                            <h4>Пиво</h4>
-                            <p>Освіжаючість</p>
-                        </div>
-                    </a>
+            <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+        </div>
+    </div>
 
-                    <a href="/liqueur" class="category">
-                        <div>
-                            <img src="/static/picture/alcohol/liqueur/jagermeister.png" alt="Лікер">
-                            <h4>Лікер</h4>
-                            <p>Солодкість</p>
-                        </div>
-                    </a>
+</header>
+<main>
+    <section class="hero">
+        <div class="hero-text">
+            <h2>ALCOHOL TRADITIONS</h2>
+            <h3>Just relax and go with the flow</h3>
+            <p>Створюємо незабутні моменти з кожним ковтком, відкриваючи світ витончених смаків і майстерності.</p>
+            <button onclick="window.location.href='/categories';">GO TO THE SHOP</button>
+        </div>
+        <div class="hero-image">
+            <img src="/static/picture/main/bottle.png" alt="Bottle Image">
+        </div>
+    </section>
 
-                    <a href="/wine" class="category">
-                        <div>
-                            <img src="/static/picture/alcohol/wine/el.png" alt="Вино">
-                            <h4>Вино</h4>
-                            <p>Елегантність</p>
-                        </div>
-                    </a>
+    <section class="categories">
+        <div class="category-container">
+            <button class="scroll-button left-scroll">&#10094;</button>
 
-                    <a href="/whiskey" class="category">
-                        <div>
-                            <img src="/static/picture/alcohol/whiskey/jackblack.png" alt="Віскі">
-                            <h4>Віскі</h4>
-                            <p>Міць</p>
-                        </div>
-                    </a>
+            <div class="category-wrapper">
+                <a href="/category" class="category">
+                    <div>
+                        <img src="/static/picture/alcohol/beer/hennessy.png" alt="Пиво">
+                        <h4>Пиво</h4>
+                        <p>Освіжаючість</p>
+                    </div>
+                </a>
 
-                    <a href="/gin" class="category">
-                        <div>
-                            <img src="/static/picture/alcohol/gin/bombay.png" alt="Джин">
-                            <h4>Джин</h4>
-                            <p>Ароматність</p>
-                        </div>
-                    </a>
+                <a href="/liqueur" class="category">
+                    <div>
+                        <img src="/static/picture/alcohol/liqueur/jagermeister.png" alt="Лікер">
+                        <h4>Лікер</h4>
+                        <p>Солодкість</p>
+                    </div>
+                </a>
 
-                    <a href="/rum" class="category">
-                        <div>
+                <a href="/wine" class="category">
+                    <div>
+                        <img src="/static/picture/alcohol/wine/el.png" alt="Вино">
+                        <h4>Вино</h4>
+                        <p>Елегантність</p>
+                    </div>
+                </a>
+
+                <a href="/whiskey" class="category">
+                    <div>
+                        <img src="/static/picture/alcohol/whiskey/jackblack.png" alt="Віскі">
+                        <h4>Віскі</h4>
+                        <p>Міць</p>
+                    </div>
+                </a>
+
+                <a href="/gin" class="category">
+                    <div>
+                        <img src="/static/picture/alcohol/gin/bombay.png" alt="Джин">
+                        <h4>Джин</h4>
+                        <p>Ароматність</p>
+                    </div>
+                </a>
+
+                <a href="/rum" class="category">
+                    <div>
                         <img src="/static/images/bacardi.png" alt="Ром">
                         <h4>Ром</h4>
                         <p>Чистота</p>
@@ -116,64 +119,64 @@
                             <p>Витонченість</p>
                         </div>
                     </a>
-                </div>
-
-                <button class="scroll-button right-scroll">&#10095;</button>
             </div>
-        </section>
-        <section class="categories">
-            <img src="/static/images/sketch.png" alt="Категорії" class="bottom-image">
-        </section>
 
-        <section class="propositions">
-            <h2>Спробуйте їх сьогодні!</h2>
-            <h3>Пропозиція тижня</h3>
-            <p>Ці напої стали "Пропозицією тижня" завдяки своєму неповторному смаку та вибору наших клієнтів.</p>
-            <div class="product-container">
-                <div class="product">
-                    <img src="/static/images/hennessy.png" alt="Hennessy VS" class="product-image">
-                    <div class="product-info">
-                        <h4>Hennessy VS</h4>
-                        <p class="category">Коньяк</p>
-                        <p class="in-stock">IN STOCK</p>
-                        <p class="price">1199.00</p>
-                    </div>
-                    <div class="icons">
-                        <button class="icon">&#9825;</button>
-                        <button class="icon">&#128722;</button>
-                    </div>
+            <button class="scroll-button right-scroll">&#10095;</button>
+        </div>
+    </section>
+    <section class="categories">
+        <img src="/static/images/sketch.png" alt="Категорії" class="bottom-image">
+    </section>
+
+    <section class="propositions">
+        <h2>Спробуйте їх сьогодні!</h2>
+        <h3>Пропозиція тижня</h3>
+        <p>Ці напої стали "Пропозицією тижня" завдяки своєму неповторному смаку та вибору наших клієнтів.</p>
+        <div class="product-container">
+            <div class="product">
+                <img src="/static/images/hennessy.png" alt="Hennessy VS" class="product-image">
+                <div class="product-info">
+                    <h4>Hennessy VS</h4>
+                    <p class="category">Коньяк</p>
+                    <p class="in-stock">IN STOCK</p>
+                    <p class="price">1199.00</p>
                 </div>
-                <div class="product">
-                    <img src="/static/images/bacardi.png" alt="Carta Blanca Bacardi" class="product-image">
-                    <div class="product-info">
-                        <h4>Carta Blanca Bacardi</h4>
-                        <p class="category">Ром</p>
-                        <p class="in-stock">IN STOCK</p>
-                        <p class="price">469.00</p>
-                    </div>
-                    <div class="icons">
-                        <button class="icon">&#9825;</button>
-                        <button class="icon">&#128722;</button>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="/static/images/bombay.png" alt="Bombay Sapphire" class="product-image">
-                    <div class="product-info">
-                        <h4>Bombay Sapphire</h4>
-                        <p class="category">Джин</p>
-                        <p class="in-stock">IN STOCK</p>
-                        <p class="price">1065.00</p>
-                    </div>
-                    <div class="icons">
-                        <button class="icon">&#9825;</button>
-                        <button class="icon">&#128722;</button>
-                    </div>
+                <div class="icons">
+                    <button class="icon">&#9825;</button>
+                    <button class="icon">&#128722;</button>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="product">
+                <img src="/static/images/bacardi.png" alt="Carta Blanca Bacardi" class="product-image">
+                <div class="product-info">
+                    <h4>Carta Blanca Bacardi</h4>
+                    <p class="category">Ром</p>
+                    <p class="in-stock">IN STOCK</p>
+                    <p class="price">469.00</p>
+                </div>
+                <div class="icons">
+                    <button class="icon">&#9825;</button>
+                    <button class="icon">&#128722;</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="/static/images/bombay.png" alt="Bombay Sapphire" class="product-image">
+                <div class="product-info">
+                    <h4>Bombay Sapphire</h4>
+                    <p class="category">Джин</p>
+                    <p class="in-stock">IN STOCK</p>
+                    <p class="price">1065.00</p>
+                </div>
+                <div class="icons">
+                    <button class="icon">&#9825;</button>
+                    <button class="icon">&#128722;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-    <script src="/static/scripts.js"></script>
-    <script src="/static/scriptsUser.js"></script>
+<script src="/static/scripts.js"></script>
+<script src="/static/scriptsUser.js"></script>
 </body>
 </html>

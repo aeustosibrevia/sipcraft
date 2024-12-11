@@ -68,7 +68,8 @@ class FavoriteItem(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    is_admin = session.get('isAdmin', False)
+    return render_template('index.html', is_admin=is_admin)
 
 
 def check_liked_items(items):
@@ -100,6 +101,11 @@ def about():
 @app.route('/categories')
 def categories():
     return render_template('categories.html')
+
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -140,6 +146,7 @@ def login():
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
             session['username'] = user.username
+            session['isAdmin'] = user.isAdmin
             flash('You are now logged in', 'success')
             return redirect(url_for('index'))
         else:
@@ -153,14 +160,16 @@ def login():
 def logout():
     session.pop('user_id', None)
     session.pop('username', None)
+    session.pop('isAdmin', None)
     flash('You are now logged out', 'success')
     return redirect(url_for('index'))
 
 @app.route('/api/auth_status', methods=['GET'])
 def auth_status():
     is_logged_in = 'user_id' in session
+    is_admin_in_session = 'isAdmin' in session
     username = session.get('username', '') if is_logged_in else ''
-    return jsonify({'isLoggedIn': is_logged_in, 'username': username})
+    return jsonify({'isLoggedIn': is_logged_in, 'username': username, 'isAdmin': is_admin_in_session})
 
 
 @app.route('/category')  # category == beer
