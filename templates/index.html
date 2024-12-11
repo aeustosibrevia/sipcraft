@@ -13,13 +13,17 @@
         <div class="logo">
             <a href="/"><h1>SipCraft</h1></a>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Пошук...">
-            <button class="search-button">Search</button>
+        <div class="search-bar" style="display: flex; align-items: center; gap: 8px;">
+            <form action="/search" method="get" style="display: flex; align-items: center; gap: 8px;">
+                <input type="text" name="q" placeholder="Пошук..." required>
+                <button type="submit" class="search-button">Search</button>
+            </form>
         </div>
+
+
         <nav>
             <ul>
-                <li><a href="/">Головна</a></li>
+                <li><a href="/" class="select">Головна</a></li>
                 <li><a href="/categories">Магазин</a></li>
                 <li><a href="/about">Про нас</a></li>
                 {% if is_admin %}

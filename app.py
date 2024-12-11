@@ -69,6 +69,7 @@ class FavoriteItem(db.Model):
 @app.route('/')
 def index():
     is_admin = session.get('isAdmin', False)
+    #print(f"Is Admin {is_admin}")
     return render_template('index.html', is_admin=is_admin)
 
 
@@ -167,13 +168,14 @@ def logout():
 @app.route('/api/auth_status', methods=['GET'])
 def auth_status():
     is_logged_in = 'user_id' in session
-    is_admin_in_session = 'isAdmin' in session
     username = session.get('username', '') if is_logged_in else ''
-    return jsonify({'isLoggedIn': is_logged_in, 'username': username, 'isAdmin': is_admin_in_session})
+    is_admin = session.get('isAdmin', False)
+    return jsonify({'isLoggedIn': is_logged_in, 'username': username, 'isAdmin': is_admin})
 
 
 @app.route('/category')  # category == beer
 def category():
+    is_admin = session.get('isAdmin', False)
     beer_category = Category.query.filter_by(name='Пиво').first()
     if beer_category:
         items = Item.query.filter_by(category=beer_category).all()
@@ -181,7 +183,7 @@ def category():
         items = []
 
     data = check_liked_items(items)
-    return render_template('category.html', data=data)
+    return render_template('category.html', data=data, is_admin=is_admin)
 
 
 @app.route('/whiskey')
@@ -407,6 +409,21 @@ def remove_from_liked(item_id):
 
     flash('Товар успішно видалено зі списку бажань.', 'success')
     return redirect(url_for('liked'))
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('q', '').strip()  # Отримуємо параметр пошуку та видаляємо зайві пробіли
+    if query:
+        # Пошук по назві, опису та виробнику, враховуючи тільки активні товари
+        results = Item.query.filter(
+            Item.isActive == True,
+            (Item.name.ilike(f'%{query}%') |
+             Item.description.ilike(f'%{query}%') |
+             Item.producer.ilike(f'%{query}%'))
+        ).all()
+    else:
+        results = []
+    return render_template('search_results.html', results=results, query=query)
 
 
 if __name__ == '__main__':

@@ -50,16 +50,17 @@
 <main>
     <section class="category-selection">
         <hr class="section-line">
-        <h2>Пиво</h2>
+        <h2>Пошук</h2>
         <hr class="section-line">
-        <div class="product-grid">
-            {% for el in data %}
+            {% if results %}
+            <div class="product-grid">
+            {% for el in results %}
             <a href="product/{{el.id}}" style="text-decoration: none; color: inherit;">
                 <div class="product">
                     <img src="{{ el.image_url }}" alt="{{ el.name }}" class="product-image">
                     <div class="product-info">
                         <h4>{{ el.name }}</h4>
-                        <p class="category">Пиво</p>
+                        <p class="category">{{ el.category.name }}</p>
                         <p class="in-stock">IN STOCK</p>
                         <p class="price">₴{{ "%.2f"|format(el.price) }}</p>
                     </div>
@@ -84,8 +85,11 @@
                 </div>
             </a>
             {% endfor %}
+            {% else %}
+            <p>Нічого не знайдено.</p>
+            {% endif %}
         </div>
-        </a>
+
     </section>
 </main>
 <script src="/static/scriptsLiked.js"></script>
