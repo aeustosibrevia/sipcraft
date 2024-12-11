@@ -23,11 +23,26 @@
                     <li><a href="/categories">Магазин</a></li>
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="/liked"><img src="/static/picture/header/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="/login"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
+                    <li><a href="#"><img src="/static/picture/header/user.png" alt="User" class="icon"></a></li>
                     <li><a href="/cart"><img src="/static/picture/header/basket.png" alt="User" class="icon"></a></li>
                 </ul>
             </nav>
         </div>
+        <div id="userPopup" class="popup hidden">
+            <div class="popup-content">
+                <p id="popupMessage"></p>
+
+                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+                <hr id="separator" class="hidden">
+                <p id="userInfo" class="hidden">ПІБ користувача</p>
+
+                <button id="loginBtn">Увійти</button>
+                <button id="registerBtn">Зареєструватися</button>
+
+                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+            </div>
+        </div>
+
     </header>
     <main>
         <section class="hero">
@@ -159,5 +174,6 @@
     </main>
 
     <script src="/static/scripts.js"></script>
+    <script src="/static/scriptsUser.js"></script>
 </body>
 </html>

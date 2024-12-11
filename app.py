@@ -156,6 +156,12 @@ def logout():
     flash('You are now logged out', 'success')
     return redirect(url_for('index'))
 
+@app.route('/api/auth_status', methods=['GET'])
+def auth_status():
+    is_logged_in = 'user_id' in session
+    username = session.get('username', '') if is_logged_in else ''
+    return jsonify({'isLoggedIn': is_logged_in, 'username': username})
+
 
 @app.route('/category')  # category == beer
 def category():

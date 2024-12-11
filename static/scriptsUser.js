@@ -1,60 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const userIcon = document.getElementById('userIcon');
-    const userPopup = document.getElementById('userPopup');
-    const usernameDisplay = document.getElementById('usernameDisplay'); 
-    const userInfo = document.getElementById('userInfo'); 
-    const separator = document.getElementById('separator'); 
-    const loginBtn = document.getElementById('loginBtn'); 
-    const registerBtn = document.getElementById('registerBtn'); 
-    const logoutBtn = document.getElementById('logoutBtn'); 
+document.addEventListener("DOMContentLoaded", () => {
+    const userIcon = document.querySelector("nav ul li:nth-child(5) a img");
+    const popup = document.getElementById("userPopup");
+    const popupMessage = document.getElementById("popupMessage");
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+    const userInfo = document.getElementById("userInfo");
+    const separator = document.getElementById("separator");
 
-    let isLoggedIn = true;
-    let username = "Іван Іваненко";
+    fetch("/api/auth_status")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.isLoggedIn) {
+                showLoggedInView(data.username);
+            } else {
+                showLoggedOutView();
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching auth status:", error);
+        });
 
-    function updatePopupContent() {
-        if (isLoggedIn) {
-            usernameDisplay.textContent = username;
-            usernameDisplay.classList.remove('hidden');
-            userInfo.classList.remove('hidden');
-            separator.classList.remove('hidden');
-            loginBtn.classList.add('hidden');
-            registerBtn.classList.add('hidden');
-            logoutBtn.classList.remove('hidden');
-        } else {
-            popupMessage.textContent = "Ви ще не увійшли у акаунт";
-            usernameDisplay.classList.add('hidden');
-            userInfo.classList.add('hidden');
-            separator.classList.add('hidden');
-            loginBtn.classList.remove('hidden');
-            registerBtn.classList.remove('hidden');
-            logoutBtn.classList.add('hidden');
-        }
+    userIcon.addEventListener("click", (event) => {
+        event.preventDefault();
+        popup.classList.toggle("hidden");
+    });
+
+    function showLoggedInView(username) {
+        popupMessage.classList.add("hidden");
+        loginBtn.classList.add("hidden");
+        registerBtn.classList.add("hidden");
+
+        usernameDisplay.textContent = username;
+        usernameDisplay.classList.remove("hidden");
+        separator.classList.remove("hidden");
+        userInfo.textContent = `Вітаємо, ${username}!`;
+        userInfo.classList.remove("hidden");
+
+        logoutBtn.classList.remove("hidden");
     }
 
-    userIcon.addEventListener('click', () => {
-        userPopup.classList.toggle('hidden');
-        updatePopupContent();
+    function showLoggedOutView() {
+        popupMessage.textContent = "Ви ще не увійшли у акаунт";
+        popupMessage.classList.remove("hidden");
+
+        loginBtn.classList.remove("hidden");
+        registerBtn.classList.remove("hidden");
+
+        usernameDisplay.classList.add("hidden");
+        separator.classList.add("hidden");
+        userInfo.classList.add("hidden");
+
+        logoutBtn.classList.add("hidden");
+    }
+
+    loginBtn.addEventListener("click", () => {
+        window.location.href = "/login";
     });
 
-    loginBtn.addEventListener('click', () => {
-        window.location.href = "login.html";
+    registerBtn.addEventListener("click", () => {
+        window.location.href = "/signup";
     });
 
-    registerBtn.addEventListener('click', () => {
-        window.location.href = "singup.html"; 
+    logoutBtn.addEventListener("click", () => {
+        fetch("/logout")
+            .then(() => {
+                showLoggedOutView();
+            })
+            .catch((error) => {
+                console.error("Error logging out:", error);
+            });
     });
 
-    logoutBtn.addEventListener('click', () => {
-        isLoggedIn = false;
-        alert("Ви вийшли з акаунта!");
-        updatePopupContent();
-    });
-
-    window.addEventListener('click', (e) => {
-        if (!userPopup.contains(e.target) && e.target !== userIcon) {
-            userPopup.classList.add('hidden');
+    document.addEventListener("click", (event) => {
+        if (!popup.contains(event.target) && event.target !== userIcon) {
+            popup.classList.add("hidden");
         }
     });
 });
-
-
