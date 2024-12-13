@@ -7,453 +7,462 @@
     <link rel="stylesheet" href="/static/stylesAdmin.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/"><h1>SipCraft</h1></a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Пошук...">
-                <button class="search-button">Search</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/" class="select">Головна</a></li>
-                    <li><a href="/categories">Магазин</a></li>
-                    <li><a href="/aboutus">Про нас</a></li>
-                    <li><a href="liked.html"><img src="/static/images/liked.png" alt="Cart" class="icon"></a></li>
-                    <li><a href="#"><img src="/static/images/user.png" id = "userIcon" alt="User" class="icon"></a></li>
-                    <li><a href="/basket"><img src="/static/images/basket.png" alt="User" class="icon"></a></li>
-                </ul>
-            </nav>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/"><h1>SipCraft</h1></a>
         </div>
-        <div id="userPopup" class="popup hidden">
-            <div class="popup-content">
-                <p id="popupMessage"></p>
-
-                <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
-                <hr id="separator" class="hidden">
-                <p id="userInfo" class="hidden">ПІБ користувача</p>                
-                
-                <button id="loginBtn">Увійти</button>
-                <button id="registerBtn">Зареєструватися</button>
-        
-                <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
-            </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Пошук...">
+            <button class="search-button">Search</button>
         </div>
-        
-    </header>
+        <nav>
+            <ul>
+                <li><a href="/" class="select">Головна</a></li>
+                <li><a href="/categories">Магазин</a></li>
+                <li><a href="/aboutus">Про нас</a></li>
+                <li><a href="liked.html"><img src="/static/images/liked.png" alt="Cart" class="icon"></a></li>
+                <li><a href="#"><img src="/static/images/user.png" id="userIcon" alt="User" class="icon"></a></li>
+                <li><a href="/basket"><img src="/static/images/basket.png" alt="User" class="icon"></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="userPopup" class="popup hidden">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
 
-    <main>
-        <section class="fixed-buttons">
-            <button onclick="location.href='#addNewProduct'">Додати новий товар</button>
-            <button onclick="location.href='#weekPrice'">Ціна тижня</button>
-            <button onclick="location.href='#searchProduct'">Пошук товару</button>
-            <button onclick="location.href='#allProduct'">Список всіх товарів</button>
-            <button onclick="location.href='#customerOrder'">Замовлення покупців</button>
-        </section>
-        <section class="product-section" id="addNewProduct">
-            <hr class="section-line">
-            <h1>Додати новий товар</h1>
-            <hr class="section-line">
-            <div class="container">
+            <h2 id="usernameDisplay" class="hidden">Іван Іваненко</h2>
+            <hr id="separator" class="hidden">
+            <p id="userInfo" class="hidden">ПІБ користувача</p>
+
+            <button id="loginBtn">Увійти</button>
+            <button id="registerBtn">Зареєструватися</button>
+
+            <button id="logoutBtn" class="hidden">Вихід з акаунта</button>
+        </div>
+    </div>
+
+</header>
+
+<main>
+    <section class="fixed-buttons">
+        <button onclick="location.href='#addNewProduct'">Додати новий товар</button>
+        <button onclick="location.href='#weekPrice'">Ціна тижня</button>
+        <button onclick="location.href='#searchProduct'">Пошук товару</button>
+        <button onclick="location.href='#allProduct'">Список всіх товарів</button>
+        <button onclick="location.href='#customerOrder'">Замовлення покупців</button>
+    </section>
+    <section class="product-section" id="addNewProduct">
+        <hr class="section-line">
+        <h1>Додати новий товар</h1>
+        <hr class="section-line">
+        <div class="container">
+            <form action="/admin" method="post" enctype="multipart/form-data">
                 <div class="description-section">
                     <label>Опис</label>
-                    <textarea id="description"></textarea>
+                    <textarea name='description' id="description"></textarea>
                 </div>
                 <div class="details-section">
                     <label>Назва товару</label>
-                    <input type="text" id="product-name">
+                    <input type="text" name='name' id="name">
 
                     <div class="input-row">
                         <div class="input-field">
                             <label>Покликання на фото</label>
-                            <input type="text" id="product-link">
+                            <input type="file" name='image' id="image" accept="image/*">
                         </div>
                         <div class="input-field">
                             <label>Категорія</label>
-                            <input type="text" id="category">
+                            <input type="text" name='category_id' id="category_id">
                         </div>
                         <div class="input-field">
                             <label>Ціна</label>
-                            <input type="text" id="price">
+                            <input type="text" name='price' id="price">
                         </div>
                     </div>
-                    
+
                     <div class="input-row">
                         <div class="input-field">
                             <label>Об'єм</label>
-                            <input type="text" id="volume">
+                            <input type="text" name='volume' id="volume">
                         </div>
                         <div class="input-field">
                             <label>Географія</label>
-                            <input type="text" id="geography">
+                            <input type="text" name='geography' id="geography">
                         </div>
                         <div class="input-field">
                             <label>Міцність</label>
-                            <input type="text" id="strength">
+                            <input type="text" name='strength' id="strength">
                         </div>
                         <div class="input-field">
                             <label>Виробник</label>
-                            <input type="text" id="manufacturer">
+                            <input type="text" name='producer' id="producer">
                         </div>
                     </div>
 
                 </div>
                 <div class="button-section">
-                    <button type="button">Додати</button>
+                    <button type="sumbit">Додати</button>
                 </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="price-section" id="weekPrice">
+        <hr class="section-line">
+        <h1>Ціна тижня</h1>
+        <hr class="section-line">
+        <label>Додати товар до категорії ціна тижня</label>
+        <div class="container">
+            <div class="description-section">
+                <label>Опис</label>
+                <textarea id="description"></textarea>
             </div>
-        </section>
+            <div class="details-section">
+                <label>Назва товару</label>
+                <input type="text" id="product-name">
 
-        <section class="price-section" id="weekPrice">
-            <hr class="section-line">
-            <h1>Ціна тижня</h1>
-            <hr class="section-line">
-            <label>Додати товар до категорії ціна тижня</label>
-            <div class="container">
-                <div class="description-section">
-                    <label>Опис</label>
-                    <textarea id="description"></textarea>
-                </div>
-                <div class="details-section">
-                    <label>Назва товару</label>
-                    <input type="text" id="product-name">
-
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Покликання на фото</label>
-                            <input type="text" id="product-link">
-                        </div>
-                        <div class="input-field">
-                            <label>Категорія</label>
-                            <input type="text" id="category">
-                        </div>
-                        <div class="input-field">
-                            <label>Ціна</label>
-                            <input type="text" id="price">
-                        </div>
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Покликання на фото</label>
+                        <input type="text" id="product-link">
                     </div>
-                    
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Об'єм</label>
-                            <input type="text" id="volume">
-                        </div>
-                        <div class="input-field">
-                            <label>Географія</label>
-                            <input type="text" id="geography">
-                        </div>
-                        <div class="input-field">
-                            <label>Міцність</label>
-                            <input type="text" id="strength">
-                        </div>
-                        <div class="input-field">
-                            <label>Виробник</label>
-                            <input type="text" id="manufacturer">
-                        </div>
+                    <div class="input-field">
+                        <label>Категорія</label>
+                        <input type="text" id="category">
                     </div>
-
-                </div>
-                <div class="button-section">
-                    <button type="button">Додати</button>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <label>Обрати товар з існуючих</label>
-                <select id="price-selection" class="dropdown-menu">
-                    <option value="Hennessy VS">Hennessy VS</option>
-                    <option value="Carta Blanca Bacardi">Carta Blanca Bacardi</option>
-                    <option value="Bombay Sapphire">Bombay Sapphire</option>
-                </select>
-            </div>
-            
-            <div class="container">
-                <div class="description-section">
-                    <label>Опис</label>
-                    <textarea id="description"></textarea>
-                </div>
-                <div class="details-section">
-                    <label>Назва товару</label>
-                    <input type="text" id="product-name">
-
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Покликання на фото</label>
-                            <input type="text" id="product-link">
-                        </div>
-                        <div class="input-field">
-                            <label>Категорія</label>
-                            <input type="text" id="category">
-                        </div>
-                        <div class="input-field">
-                            <label>Ціна</label>
-                            <input type="text" id="price">
-                        </div>
+                    <div class="input-field">
+                        <label>Ціна</label>
+                        <input type="text" id="price">
                     </div>
-                    
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Об'єм</label>
-                            <input type="text" id="volume">
-                        </div>
-                        <div class="input-field">
-                            <label>Географія</label>
-                            <input type="text" id="geography">
-                        </div>
-                        <div class="input-field">
-                            <label>Міцність</label>
-                            <input type="text" id="strength">
-                        </div>
-                        <div class="input-field">
-                            <label>Виробник</label>
-                            <input type="text" id="manufacturer">
-                        </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Об'єм</label>
+                        <input type="text" id="volume">
                     </div>
-
-                </div>
-                <div class="button-section">
-                    <button type="button">Редагувати</button>
-                    <button type="button">Видалити</button>
-                </div>
-            </div>
-
-        </section>
-
-
-        <section class="search-section" id="searchProduct">
-            <hr class="section-line">
-            <h1>Пошук товару</h1>
-            <hr class="section-line">
-        
-            <div class="search-product">
-                <input type="text" id="search-product-input" placeholder="Введіть назву товару">
-                <button class="search-button">Шукати</button>
-            </div>
-        
-            <div class="container">
-                <div class="description-section">
-                    <label>Опис</label>
-                    <textarea id="description"></textarea>
-                </div>
-                <div class="details-section">
-                    <label>Назва товару</label>
-                    <input type="text" id="product-name">
-        
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Покликання на фото</label>
-                            <input type="text" id="product-link">
-                        </div>
-                        <div class="input-field">
-                            <label>Категорія</label>
-                            <input type="text" id="category">
-                        </div>
-                        <div class="input-field">
-                            <label>Ціна</label>
-                            <input type="text" id="price">
-                        </div>
+                    <div class="input-field">
+                        <label>Географія</label>
+                        <input type="text" id="geography">
                     </div>
-                    
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Об'єм</label>
-                            <input type="text" id="volume">
-                        </div>
-                        <div class="input-field">
-                            <label>Географія</label>
-                            <input type="text" id="geography">
-                        </div>
-                        <div class="input-field">
-                            <label>Міцність</label>
-                            <input type="text" id="strength">
-                        </div>
-                        <div class="input-field">
-                            <label>Виробник</label>
-                            <input type="text" id="manufacturer">
-                        </div>
+                    <div class="input-field">
+                        <label>Міцність</label>
+                        <input type="text" id="strength">
                     </div>
-        
+                    <div class="input-field">
+                        <label>Виробник</label>
+                        <input type="text" id="manufacturer">
+                    </div>
                 </div>
-                <div class="button-section">
-                    <button type="button">Редагувати</button>
-                    <button type="button">Видалити</button>
-                </div>
-            </div>
-        </section>
-        
 
-        <section class="categoryies-section" id="allProduct">
-            <hr class="section-line">
-            <h1>Список усіх товарів</h1>
-            <hr class="section-line">
-            
-            <div class="dropdown">
-                <label>Обрати категорію товарів</label>
-                <select id="price-selection" class="dropdown-menu">
-                    <option value="wine">Вино</option>
-                    <option value="bear">Пиво</option>
-                    <option value="whiskey">Віскі</option>
-                </select>
             </div>
-        
-            <div class="container">
-                <div class="description-section">
-                    <label>Опис</label>
-                    <textarea id="description"></textarea>
-                </div>
-                <div class="details-section">
-                    <label>Назва товару</label>
-                    <input type="text" id="product-name">
-        
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Покликання на фото</label>
-                            <input type="text" id="product-link">
-                        </div>
-                        <div class="input-field">
-                            <label>Категорія</label>
-                            <input type="text" id="category">
-                        </div>
-                        <div class="input-field">
-                            <label>Ціна</label>
-                            <input type="text" id="price">
-                        </div>
-                    </div>
-                    
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Об'єм</label>
-                            <input type="text" id="volume">
-                        </div>
-                        <div class="input-field">
-                            <label>Географія</label>
-                            <input type="text" id="geography">
-                        </div>
-                        <div class="input-field">
-                            <label>Міцність</label>
-                            <input type="text" id="strength">
-                        </div>
-                        <div class="input-field">
-                            <label>Виробник</label>
-                            <input type="text" id="manufacturer">
-                        </div>
-                    </div>
-        
-                </div>
-                <div class="button-section">
-                    <button type="button">Редагувати</button>
-                    <button type="button">Видалити</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="customer-section" id="customerOrder">
-            <hr class="section-line">
-            <h1>Замовлення покупців</h1>
-            <hr class="section-line">
-            
-            <div class="dropdown">
-                <label>Обрати покупця</label>
-                <select id="price-selection" class="dropdown-menu">
-                    <option value="Іван Іваненко">Іван Іваненко</option>
-                    <option value="Петро Петренко">Петро Петренко</option>
-                    <option value="Василь">Василь</option>
-                </select>
-            </div>
-        
-            <div class="container">
-                <div class="details-section">
-                    <label>Номер замовлення</label>
-                    <input type="text" id="order-number" class ="short-input">        
-                
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label>Назва товару</label>
-                            <input type="text" id="product-name">
-                        </div>
-                        <div class="input-field">
-                            <label>Об'єм</label>
-                            <input type="text" id="volume">
-                        </div>
-                        <div class="input-field">
-                            <label>Кількість</label>
-                            <input type="text" id="quantity">
-                        </div>
-                        <div class="input-field">
-                            <label>Ціна</label>
-                            <input type="text" id="price">
-                        </div>
-                        <div class="input-field">
-                            <label>Загалом</label>
-                            <input type="text" id="total">
-                        </div>
-                        <div class="input-field">
-                            <label>Видалити товар</label>
-                            <button type="button">Видалити</button>
-                        </div>
-                    </div>
-                                        
-                    <label>Загальна сума</label>
-                    <input type="text" id="totalsum" class ="short-input">
-                </div>
-                <div class="button-section">
-                    <button type="button">Редагувати</button>
-                    <button type="button">Видалити</button>
-                </div>
-            </div>
-            
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h4>Інформація</h4>
-                <ul>
-                    <li><a href="#">Про нас</a></li>
-                    <li><a href="#">Доставка і оплата</a></li>
-                    <li><a href="#">Політика конфіденційності</a></li>
-                    <li><a href="#">Угода користувача</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Контакти</h4>
-                <ul>
-                    <li>Email: <a href="mailto:sipcraft.store@gmail.com">sipcraft.store@gmail.com</a></li>
-                    <li>Instagram: <a href="#">@sipcraft_store</a></li>
-                    <li>Телефон: <a href="#">+380XX XXXXXX</a></li>
-                    <li>Наша адреса: <a href="#">вул. Сергія Зулінського, 50, м. Вінниця</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Доставка</h4>
-                <ul>
-                    <li>Будні: <a>з 12:00 до 20:00</a></li>
-                    <li>Вихідні: <a>з 12:00 до 20:00</a></li>
-                </ul>
-                
-            </div>
-            <div class="footer-column">
-                <h4>Графік роботи call-центру:</h4>
-                <ul>
-                    <li>Будні: <a>з 9:00 до 19:00</a></li>
-                    <li>Вихідні: <a>з 10:00 до 18:00</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Слідкуй за новинами</h4>
-                <div class="social-icons">
-                    <a href="#"><img src="picture/about us/Picture2.png" alt="Email"></a>
-                    <a href="#"><img src="picture/about us/Picture5.png" alt="Instagram"></a>
-                    <a href="#"><img src="picture/about us/Picture1.png" alt="Telegram"></a>
-                    <a href="#"><img src="picture/about us/Picture4.png" alt="WhatsApp"></a>
-                </div>
+            <div class="button-section">
+                <button type="button">Додати</button>
             </div>
         </div>
-    </footer>
 
-    <script src="/static/scriptsUser.js"></script>
+        <div class="dropdown">
+            <label>Обрати товар з існуючих</label>
+            <select id="price-selection" class="dropdown-menu">
+                <option value="Hennessy VS">Hennessy VS</option>
+                <option value="Carta Blanca Bacardi">Carta Blanca Bacardi</option>
+                <option value="Bombay Sapphire">Bombay Sapphire</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="description-section">
+                <label>Опис</label>
+                <textarea id="description"></textarea>
+            </div>
+            <div class="details-section">
+                <label>Назва товару</label>
+                <input type="text" id="product-name">
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Покликання на фото</label>
+                        <input type="text" id="product-link">
+                    </div>
+                    <div class="input-field">
+                        <label>Категорія</label>
+                        <input type="text" id="category">
+                    </div>
+                    <div class="input-field">
+                        <label>Ціна</label>
+                        <input type="text" id="price">
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Об'єм</label>
+                        <input type="text" id="volume">
+                    </div>
+                    <div class="input-field">
+                        <label>Географія</label>
+                        <input type="text" id="geography">
+                    </div>
+                    <div class="input-field">
+                        <label>Міцність</label>
+                        <input type="text" id="strength">
+                    </div>
+                    <div class="input-field">
+                        <label>Виробник</label>
+                        <input type="text" id="manufacturer">
+                    </div>
+                </div>
+
+            </div>
+            <div class="button-section">
+                <button type="button">Редагувати</button>
+                <button type="button">Видалити</button>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="search-section" id="searchProduct">
+        <hr class="section-line">
+        <h1>Пошук товару</h1>
+        <hr class="section-line">
+
+        <form id="search-form" action="/search_product" method="get" autocomplete="off">
+            <input type="text" name="q" id="search-input" placeholder="Введіть назву товару" required>
+            <button type="submit" class="search-button">Search</button>
+        </form>
+
+        {% if product %}
+        <div class="container">
+            {% for product in product %}
+            <div class="product-card">
+                <div class="description-section">
+                    <label>Опис</label>
+                    <textarea readonly>{{ product.description }}</textarea>
+                </div>
+                <div class="details-section">
+                    <label>Назва товару</label>
+                    <input type="text" readonly value="{{ product.name }}">
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Покликання на фото</label>
+                            <input type="text" readonly value="{{ product.image_url }}">
+                        </div>
+                        <div class="input-field">
+                            <label>Категорія</label>
+                            <input type="text" readonly value="{{ product.category_id }}">
+                        </div>
+                        <div class="input-field">
+                            <label>Ціна</label>
+                            <input type="text" readonly value="{{ product.price }}">
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Об'єм</label>
+                            <input type="text" readonly value="{{ product.volume }}">
+                        </div>
+                        <div class="input-field">
+                            <label>Географія</label>
+                            <input type="text" readonly value="{{ product.geography }}">
+                        </div>
+                        <div class="input-field">
+                            <label>Міцність</label>
+                            <input type="text" readonly value="{{ product.strength }}">
+                        </div>
+                        <div class="input-field">
+                            <label>Виробник</label>
+                            <input type="text" readonly value="{{ product.producer }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Товарів не знайдено.</p>
+        {% endif %}
+    </section>
+
+
+    <section class="categoryies-section" id="allProduct">
+        <hr class="section-line">
+        <h1>Список усіх товарів</h1>
+        <hr class="section-line">
+
+        <div class="dropdown">
+            <label>Обрати категорію товарів</label>
+            <select id="price-selection" class="dropdown-menu">
+                <option value="wine">Вино</option>
+                <option value="bear">Пиво</option>
+                <option value="whiskey">Віскі</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="description-section">
+                <label>Опис</label>
+                <textarea id="description"></textarea>
+            </div>
+            <div class="details-section">
+                <label>Назва товару</label>
+                <input type="text" id="product-name">
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Покликання на фото</label>
+                        <input type="text" id="product-link">
+                    </div>
+                    <div class="input-field">
+                        <label>Категорія</label>
+                        <input type="text" id="category">
+                    </div>
+                    <div class="input-field">
+                        <label>Ціна</label>
+                        <input type="text" id="price">
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Об'єм</label>
+                        <input type="text" id="volume">
+                    </div>
+                    <div class="input-field">
+                        <label>Географія</label>
+                        <input type="text" id="geography">
+                    </div>
+                    <div class="input-field">
+                        <label>Міцність</label>
+                        <input type="text" id="strength">
+                    </div>
+                    <div class="input-field">
+                        <label>Виробник</label>
+                        <input type="text" id="manufacturer">
+                    </div>
+                </div>
+
+            </div>
+            <div class="button-section">
+                <button type="button">Редагувати</button>
+                <button type="button">Видалити</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="customer-section" id="customerOrder">
+        <hr class="section-line">
+        <h1>Замовлення покупців</h1>
+        <hr class="section-line">
+
+        <div class="dropdown">
+            <label>Обрати покупця</label>
+            <select id="price-selection" class="dropdown-menu">
+                <option value="Іван Іваненко">Іван Іваненко</option>
+                <option value="Петро Петренко">Петро Петренко</option>
+                <option value="Василь">Василь</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="details-section">
+                <label>Номер замовлення</label>
+                <input type="text" id="order-number" class="short-input">
+
+                <div class="input-row">
+                    <div class="input-field">
+                        <label>Назва товару</label>
+                        <input type="text" id="product-name">
+                    </div>
+                    <div class="input-field">
+                        <label>Об'єм</label>
+                        <input type="text" id="volume">
+                    </div>
+                    <div class="input-field">
+                        <label>Кількість</label>
+                        <input type="text" id="quantity">
+                    </div>
+                    <div class="input-field">
+                        <label>Ціна</label>
+                        <input type="text" id="price">
+                    </div>
+                    <div class="input-field">
+                        <label>Загалом</label>
+                        <input type="text" id="total">
+                    </div>
+                    <div class="input-field">
+                        <label>Видалити товар</label>
+                        <button type="button">Видалити</button>
+                    </div>
+                </div>
+
+                <label>Загальна сума</label>
+                <input type="text" id="totalsum" class="short-input">
+            </div>
+            <div class="button-section">
+                <button type="button">Редагувати</button>
+                <button type="button">Видалити</button>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h4>Інформація</h4>
+            <ul>
+                <li><a href="#">Про нас</a></li>
+                <li><a href="#">Доставка і оплата</a></li>
+                <li><a href="#">Політика конфіденційності</a></li>
+                <li><a href="#">Угода користувача</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Контакти</h4>
+            <ul>
+                <li>Email: <a href="mailto:sipcraft.store@gmail.com">sipcraft.store@gmail.com</a></li>
+                <li>Instagram: <a href="#">@sipcraft_store</a></li>
+                <li>Телефон: <a href="#">+380XX XXXXXX</a></li>
+                <li>Наша адреса: <a href="#">вул. Сергія Зулінського, 50, м. Вінниця</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Доставка</h4>
+            <ul>
+                <li>Будні: <a>з 12:00 до 20:00</a></li>
+                <li>Вихідні: <a>з 12:00 до 20:00</a></li>
+            </ul>
+
+        </div>
+        <div class="footer-column">
+            <h4>Графік роботи call-центру:</h4>
+            <ul>
+                <li>Будні: <a>з 9:00 до 19:00</a></li>
+                <li>Вихідні: <a>з 10:00 до 18:00</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Слідкуй за новинами</h4>
+            <div class="social-icons">
+                <a href="#"><img src="picture/about us/Picture2.png" alt="Email"></a>
+                <a href="#"><img src="picture/about us/Picture5.png" alt="Instagram"></a>
+                <a href="#"><img src="picture/about us/Picture1.png" alt="Telegram"></a>
+                <a href="#"><img src="picture/about us/Picture4.png" alt="WhatsApp"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/static/scriptsUser.js"></script>
+<script>
+
+
+</script>
 </body>
 </html>

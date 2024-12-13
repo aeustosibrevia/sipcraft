@@ -1,6 +1,8 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+from werkzeug.utils import secure_filename
 from datetime import timedelta
 
 #  пофіксити візуал з flash повідомленнями, всі відображення перекласти українською
@@ -10,6 +12,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 db = SQLAlchemy(app)
+
+UPLOAD_FOLDER = 'static/uploads/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 class Category(db.Model):
@@ -24,11 +31,12 @@ class Item(db.Model):
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String(200), nullable=False)
-    isActive = db.Column(db.Boolean, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
+    isActive = db.Column(db.Boolean, nullable=False, default=True)
+    quantity = db.Column(db.Integer, nullable=False, default=10)
     geography = db.Column(db.String(80), nullable=False)
     strength = db.Column(db.Float, nullable=False)
     producer = db.Column(db.String(80), nullable=False)
+    volume = db.Column(db.Float, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __repr__(self):
@@ -106,10 +114,47 @@ def about():
 def categories():
     return render_template('categories.html')
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/admin')
+
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return render_template('admin.html')
+    if request.method == 'POST':
+        name = request.form.get('name')
+        price = request.form.get('price')
+        category_id = request.form.get('category_id')
+        volume = request.form.get('volume')
+        geography = request.form.get('geography')
+        strength = request.form.get('strength')
+        producer = request.form.get('producer')
+        description = request.form.get('description')
+
+        file = request.files.get('image')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            image_url = filepath
+        else:
+            image_url = None
+
+        item = Item(
+            name=name,
+            price=price,
+            category_id=category_id,
+            volume=volume,
+            geography=geography,
+            strength=strength,
+            producer=producer,
+            description=description,
+            image_url=image_url
+        )
+        db.session.add(item)
+        db.session.commit()
+        return render_template('admin.html', item=item)
+    else:
+        return render_template('admin.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -344,7 +389,7 @@ def remove_from_cart():
     return jsonify({'success': True})
 
 
-@app.route('/product/<int:item_id>')
+@app.route('/product/<int:item_id>', methods=['GET', 'POST'])
 def item_page(item_id):
     item = Item.query.get(item_id)
     if not item:
@@ -429,6 +474,16 @@ def search():
     else:
         results = []
     return render_template('search_results.html', results=results, query=query)
+
+
+@app.route('/search_product', methods=['GET'])
+def search_product():
+    query = request.args.get('q', '').strip()
+    if not query:
+        return redirect(url_for('search_product'))
+    product = Item.query.filter(Item.name.ilike(f'%{query}%')).all()
+    return render_template('admin.html', product=product)
+
 
 
 if __name__ == '__main__':
