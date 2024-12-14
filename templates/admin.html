@@ -237,51 +237,58 @@
         {% if product %}
         <div class="container">
             {% for product in product %}
-            <div class="product-card">
+            <div class="product-card" data-product-id="{{ product.id }}">
                 <div class="description-section">
                     <label>Опис</label>
-                    <textarea readonly>{{ product.description }}</textarea>
+                    <textarea class="editable" readonly>{{ product.description }}</textarea>
                 </div>
                 <div class="details-section">
                     <label>Назва товару</label>
-                    <input type="text" readonly value="{{ product.name }}">
+                    <input type="text" class="editable" value="{{ product.name }}" readonly>
 
                     <div class="input-row">
                         <div class="input-field">
                             <label>Покликання на фото</label>
-                            <input type="text" readonly value="{{ product.image_url }}">
+                            <input type="text" class="editable" value="{{ product.image_url }}" readonly>
                         </div>
                         <div class="input-field">
                             <label>Категорія</label>
-                            <input type="text" readonly value="{{ product.category_id }}">
+                            <input type="text" class="editable" value="{{ product.category_id }}" readonly>
                         </div>
                         <div class="input-field">
                             <label>Ціна</label>
-                            <input type="text" readonly value="{{ product.price }}">
+                            <input type="text" class="editable" value="{{ product.price }}" readonly>
                         </div>
                     </div>
 
                     <div class="input-row">
                         <div class="input-field">
                             <label>Об'єм</label>
-                            <input type="text" readonly value="{{ product.volume }}">
+                            <input type="text" class="editable" value="{{ product.volume }}" readonly>
                         </div>
                         <div class="input-field">
                             <label>Географія</label>
-                            <input type="text" readonly value="{{ product.geography }}">
+                            <input type="text" class="editable" value="{{ product.geography }}" readonly>
                         </div>
                         <div class="input-field">
                             <label>Міцність</label>
-                            <input type="text" readonly value="{{ product.strength }}">
+                            <input type="text" class="editable" value="{{ product.strength }}" readonly>
                         </div>
                         <div class="input-field">
                             <label>Виробник</label>
-                            <input type="text" readonly value="{{ product.producer }}">
+                            <input type="text" class="editable" value="{{ product.producer }}" readonly>
                         </div>
                     </div>
                 </div>
+                <div class="button-section">
+                    <button type="button" onclick="toggleEditMode({{ product.id }})">Редагувати</button>
+                    <button type="button" onclick="deleteProduct({{ product.id }})">Видалити</button>
+                </div>
             </div>
+
             {% endfor %}
+        </div>
+
         </div>
         {% else %}
         <p>Товарів не знайдено.</p>
@@ -461,8 +468,92 @@
 
 <script src="/static/scriptsUser.js"></script>
 <script>
+    function deleteProduct(productId) {
+        if (confirm('Ви впевнені, що хочете видалити цей товар?')) {
+            fetch(`/delete_product/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+                        if (productCard) {
+                            productCard.remove();
+                        }
+                    } else {
+                        alert('Помилка: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Помилка запиту:', error);
+                    alert('Щось пішло не так. Спробуйте пізніше.');
+                });
+        }
+    }
+    function toggleEditMode(productId) {
+        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        const isEditing = productCard.classList.toggle('editing'); // Переключение класса "editing"
 
+        // Найти все редактируемые поля
+        const fields = productCard.querySelectorAll('.editable');
+        const button = productCard.querySelector('.button-section button');
 
+        if (isEditing) {
+            // Включить режим редактирования
+            fields.forEach(field => field.removeAttribute('readonly'));
+            button.textContent = 'Зберегти';
+        } else {
+            // Сохранить данные
+            const data = {};
+            fields.forEach(field => {
+                const name = field.previousElementSibling.textContent.trim();
+                const key = mapLabelToField(name); // Функция сопоставления лейблов с полями модели
+                data[key] = field.value;
+                field.setAttribute('readonly', 'true');
+            });
+
+            fetch(`/update_product/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                    button.textContent = 'Редагувати';
+                } else {
+                    alert('Помилка: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Помилка запиту:', error);
+                alert('Щось пішло не так. Спробуйте пізніше.');
+            });
+        }
+    }
+
+    function mapLabelToField(label) {
+        // Соответствие между текстом лейблов и названиями полей модели
+        const mapping = {
+            'Опис': 'description',
+            'Назва товару': 'name',
+            'Покликання на фото': 'image_url',
+            'Категорія': 'category_id',
+            'Ціна': 'price',
+            'Об\'єм': 'volume',
+            'Географія': 'geography',
+            'Міцність': 'strength',
+            'Виробник': 'producer',
+        };
+        return mapping[label] || '';
+    }
 </script>
 </body>
 </html>

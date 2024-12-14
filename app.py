@@ -484,6 +484,36 @@ def search_product():
     product = Item.query.filter(Item.name.ilike(f'%{query}%')).all()
     return render_template('admin.html', product=product)
 
+@app.route('/delete_product/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    product = Item.query.get(product_id)
+    if product:
+        db.session.delete(product)
+        db.session.commit()
+        return {'status': 'success', 'message': f'Product with ID {product_id} deleted'}
+    else:
+        return {'status': 'error', 'message': f'Product with ID {product_id} not found'}, 404
+
+@app.route('/update_product/<int:product_id>', methods=['POST'])
+def update_product(product_id):
+    product = Item.query.get(product_id)
+    if not product:
+        return {'status': 'error', 'message': f'Product with ID {product_id} not found'}, 404
+
+    data = request.json
+    product.name = data.get('name', product.name)
+    product.price = data.get('price', product.price)
+    product.description = data.get('description', product.description)
+    product.image_url = data.get('image_url', product.image_url)
+    product.geography = data.get('geography', product.geography)
+    product.strength = data.get('strength', product.strength)
+    product.producer = data.get('producer', product.producer)
+    product.volume = data.get('volume', product.volume)
+    product.category_id = data.get('category_id', product.category_id)
+
+    db.session.commit()
+    return {'status': 'success', 'message': f'Product with ID {product_id} updated successfully'}
+
 
 
 if __name__ == '__main__':
